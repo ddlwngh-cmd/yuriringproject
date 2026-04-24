@@ -12,7 +12,7 @@ AnimatorStateTransition:
     m_ConditionEvent: moveX
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: isMOVING
+    m_ConditionEvent: isMoving
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8083348705060217061}
@@ -63,7 +63,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: isMOVING
+    m_ConditionEvent: isMoving
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1944428282006365721}
@@ -135,7 +135,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: isMOVING
+    m_ConditionEvent: isMoving
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1427978458607985921}
@@ -160,7 +160,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: isMOVING
+    m_ConditionEvent: isMoving
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3162802481718479803}
@@ -188,7 +188,7 @@ AnimatorStateTransition:
     m_ConditionEvent: moveX
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: isMOVING
+    m_ConditionEvent: isMoving
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 284900844151087887}
@@ -216,7 +216,7 @@ AnimatorStateTransition:
     m_ConditionEvent: moveY
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: isMOVING
+    m_ConditionEvent: isMoving
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 471744595126663232}
@@ -253,7 +253,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: isMOVING
+  - m_Name: isMoving
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -417,7 +417,7 @@ AnimatorStateTransition:
     m_ConditionEvent: moveX
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: isMOVING
+    m_ConditionEvent: isMoving
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1088099487366138639}
@@ -468,7 +468,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: isMOVING
+    m_ConditionEvent: isMoving
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7692361294161227565}
