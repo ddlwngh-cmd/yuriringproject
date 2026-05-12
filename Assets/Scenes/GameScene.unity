@@ -466,6 +466,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5143514377948796052, guid: 1aaf3ec05cdb29549ba5505b718d2363, type: 3}
   m_PrefabInstance: {fileID: 5631970851014944684}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1585011894 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4496497475086746813, guid: 1aaf3ec05cdb29549ba5505b718d2363, type: 3}
+  m_PrefabInstance: {fileID: 5631970851014944684}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2047626020
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,21 +501,6 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
---- !u!114 &2047626023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2047626020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e7c1da39df8452ea853bcf70f4e1f23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InfiniteTilemapStreamer
-  defaultTilemapPrefab: {fileID: 100100000, guid: 1aaf3ec05cdb29549ba5505b718d2363, type: 3}
-  cameraTarget: {fileID: 428260929}
-  preloadRadius: 1
 --- !u!4 &2047626022
 Transform:
   m_ObjectHideFlags: 0
@@ -527,6 +517,21 @@ Transform:
   - {fileID: 1141576908}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2047626023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047626020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e7c1da39df8452ea853bcf70f4e1f23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InfiniteTilemapStreamer
+  defaultTilemapPrefab: {fileID: 1585011894}
+  cameraTarget: {fileID: 428260929}
+  preloadRadius: 1
 --- !u!1001 &5631970851014944684
 PrefabInstance:
   m_ObjectHideFlags: 0
