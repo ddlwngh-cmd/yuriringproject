@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 1879813142611850636}
   - component: {fileID: 5077091463733244283}
   - component: {fileID: 5351300944590564874}
-  - component: {fileID: 6584647049981483344}
-  m_Layer: 0
+  - component: {fileID: 4599216883332184583}
+  m_Layer: 7
   m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 2.4801583, y: 0.4365077}
   m_Radius: 1.4493651
---- !u!114 &6584647049981483344
+--- !u!114 &4599216883332184583
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,9 +166,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8323616257860857551}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f79857bec95f44319259ea79b18384d4, type: 3}
+  m_Script: {fileID: 11500000, guid: 6bf3336fb2e8ccc4fa04b03c55ec281d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Projectile
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileController
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
+  projectileDamage: 10

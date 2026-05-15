@@ -193,3 +193,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterController
   moveSpeed: 2
+  maxHP: 40
+  attackDamage: 20

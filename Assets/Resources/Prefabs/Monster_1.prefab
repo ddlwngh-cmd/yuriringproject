@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4870196132117128798}
   - component: {fileID: 144738915858537846}
   - component: {fileID: 4234456738947664228}
+  - component: {fileID: -6282132882323556741}
   m_Layer: 6
   m_Name: Monster_1
   m_TagString: Untagged
@@ -193,3 +194,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterController
   moveSpeed: 2
+  maxHP: 30
+  attackDamage: 15
+--- !u!114 &-6282132882323556741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885429620073356810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f79857bec95f44319259ea79b18384d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Projectile
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
