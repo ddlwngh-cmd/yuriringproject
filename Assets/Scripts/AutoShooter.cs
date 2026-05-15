@@ -3,7 +3,7 @@ using UnityEngine;
 public class AutoShooter : MonoBehaviour
 {
     [Header("Auto Fire")]
-    [SerializeField] private Projectile projectilePrefab;
+    [SerializeField] private ProjectileController projectilePrefab;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private float fireInterval = 0.35f;
     [SerializeField] private float minTurnCooldown = 0.1f;
@@ -61,7 +61,7 @@ public class AutoShooter : MonoBehaviour
             lastShotDirection = direction;
         }
 
-        Projectile projectile = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+        ProjectileController projectile = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
         projectile.Initialize(direction, speed, lifetime, damage, scale);
 
         nextFireTime = Time.time + cooldown;
