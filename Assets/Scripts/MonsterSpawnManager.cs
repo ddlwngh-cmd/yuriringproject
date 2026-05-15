@@ -168,6 +168,12 @@ public class MonsterSpawnManager : MonoBehaviour
             monsterController.SetTarget(playerTarget);
         }
 
+        monsterflip flipController = monster.GetComponent<monsterflip>();
+        if (flipController != null)
+        {
+            flipController.SetTarget(playerTarget);
+        }
+
         SpawnedMonsterTracker tracker = monster.AddComponent<SpawnedMonsterTracker>();
         state.AliveCount++;
         state.SpawnedTotal++;
