@@ -1,10 +1,19 @@
+using System;
 using UnityEngine;
 
 public class MonsterController : MonoBehaviour, IDamageable
 {
+    [Serializable]
+    public struct ExpOrbDropEntry
+    {
+        public GameObject orbPrefab;
+        [Range(0f, 1f)] public float dropChance;
+    }
+
     [SerializeField, Min(0f)] private float moveSpeed = 2f;
     [SerializeField, Min(1f)] private float maxHP = 30f;
     [SerializeField, Min(0f)] private float attackDamage = 10f;
+    [SerializeField] private ExpOrbDropEntry[] expOrbDropTable;
 
     private Transform target;
     private float currentHP;
@@ -57,7 +66,30 @@ public class MonsterController : MonoBehaviour, IDamageable
         currentHP = Mathf.Max(0f, currentHP - damage);
         if (currentHP <= 0f)
         {
+            DropExpOrbs();
             Destroy(gameObject);
+        }
+    }
+
+    private void DropExpOrbs()
+    {
+        if (expOrbDropTable == null || expOrbDropTable.Length == 0)
+        {
+            return;
+        }
+
+        for (int i = 0; i < expOrbDropTable.Length; i++)
+        {
+            ExpOrbDropEntry entry = expOrbDropTable[i];
+            if (entry.orbPrefab == null || entry.dropChance <= 0f)
+            {
+                continue;
+            }
+
+            if (UnityEngine.Random.value <= entry.dropChance)
+            {
+                Instantiate(entry.orbPrefab, transform.position, Quaternion.identity);
+            }
         }
     }
 
