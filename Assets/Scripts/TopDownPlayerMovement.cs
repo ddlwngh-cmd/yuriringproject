@@ -18,6 +18,14 @@ public class TopDownPlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (GamePauseState.IsGameplayPaused)
+        {
+            animator.SetFloat("moveX", lastFacing.x);
+            animator.SetFloat("moveY", lastFacing.y);
+            animator.SetBool("isMoving", false);
+            return;
+        }
+
         Vector2 rawInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 movement = rawInput.normalized;
         bool isMoving = rawInput.sqrMagnitude > 0f;

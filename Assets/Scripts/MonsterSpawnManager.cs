@@ -79,6 +79,11 @@ public class MonsterSpawnManager : MonoBehaviour
 
     private void Update()
     {
+        if (GamePauseState.IsGameplayPaused)
+        {
+            return;
+        }
+
         float elapsed = Time.timeSinceLevelLoad;
 
         foreach (SpawnRuleState state in spawnStates)

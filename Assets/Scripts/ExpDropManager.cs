@@ -46,6 +46,11 @@ public class ExpDropManager : MonoBehaviour
 
     public void AddExp(float amount)
     {
+        if (GamePauseState.IsGameplayPaused)
+        {
+            return;
+        }
+
         if (amount <= 0f)
         {
             return;

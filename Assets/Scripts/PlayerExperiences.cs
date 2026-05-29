@@ -118,7 +118,7 @@ public class PlayerExperiences : MonoBehaviour
 
             if (levelUpFullGaugeHoldSeconds > 0f)
             {
-                yield return new WaitForSeconds(levelUpFullGaugeHoldSeconds);
+                yield return new WaitForSecondsRealtime(levelUpFullGaugeHoldSeconds);
             }
 
             currentLevel++;
