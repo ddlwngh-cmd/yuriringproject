@@ -172,4 +172,4 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
-  projectileDamage: 10
+  damageMultiplier: 1

@@ -8,7 +8,8 @@ public class Projectile : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Vector2 moveDirection = Vector2.right;
     private float moveSpeed;
-    private float damage;
+    private float damageMultiplier = 1f;
+    private PlayerStatus playerStatus;
 
     private void Awake()
     {
@@ -21,11 +22,12 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    public void Initialize(Vector2 direction, float speed, float lifetime, float projectileDamage, float projectileScale)
+    public void Initialize(Vector2 direction, float speed, float lifetime, PlayerStatus status, float multiplier, float projectileScale)
     {
         moveDirection = direction.normalized;
         moveSpeed = speed;
-        damage = projectileDamage;
+        playerStatus = status;
+        damageMultiplier = Mathf.Max(0f, multiplier);
         transform.localScale = Vector3.one * projectileScale;
 
         ApplySpriteOrientation(moveDirection);
@@ -66,6 +68,16 @@ public class Projectile : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 
+    private float CalculateDamage()
+    {
+        if (playerStatus == null)
+        {
+            return 0f;
+        }
+
+        return playerStatus.CalculateDamage(damageMultiplier);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if ((enemyLayer.value & (1 << other.gameObject.layer)) == 0)
@@ -76,7 +88,7 @@ public class Projectile : MonoBehaviour
         IDamageable damageable = other.GetComponent<IDamageable>();
         if (damageable != null)
         {
-            damageable.TakeDamage(damage);
+            damageable.TakeDamage(CalculateDamage());
         }
 
         Destroy(gameObject);

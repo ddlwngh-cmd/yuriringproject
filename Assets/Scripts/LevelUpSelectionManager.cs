@@ -10,6 +10,7 @@ public enum LevelUpCardEffect
     None,
     DamageAdd,
     DamagePercent,
+    AtkUp,
     FireIntervalAdd,
     FireIntervalPercent,
     ProjectileSpeedAdd,
@@ -50,6 +51,7 @@ public class LevelUpSelectionManager : MonoBehaviour
     [SerializeField] private AutoShooter autoShooter;
     [SerializeField] private TopDownPlayerMovement playerMovement;
     [SerializeField] private PlayerHealth playerHealth;
+    [SerializeField] private PlayerStatus playerStatus;
 
     [Header("Data")]
     [SerializeField] private string levelUpCardCsvResourcePath = "LevelUpCard";
@@ -121,7 +123,7 @@ public class LevelUpSelectionManager : MonoBehaviour
         }
 
         GameObject player = null;
-        if (playerExperiences == null || autoShooter == null || playerMovement == null || playerHealth == null)
+        if (playerExperiences == null || autoShooter == null || playerMovement == null || playerHealth == null || playerStatus == null)
         {
             player = GameObject.FindGameObjectWithTag("Player");
         }
@@ -144,6 +146,11 @@ public class LevelUpSelectionManager : MonoBehaviour
         if (playerHealth == null && player != null)
         {
             playerHealth = player.GetComponent<PlayerHealth>();
+        }
+
+        if (playerStatus == null && player != null)
+        {
+            playerStatus = player.GetComponent<PlayerStatus>();
         }
 
         if (cardContainer == null)
@@ -291,10 +298,13 @@ public class LevelUpSelectionManager : MonoBehaviour
         switch (card.Effect)
         {
             case LevelUpCardEffect.DamageAdd:
-                autoShooter?.AddDamage(value);
+                autoShooter?.AddDamageMultiplier(value);
                 break;
             case LevelUpCardEffect.DamagePercent:
-                autoShooter?.AddDamagePercent(value);
+                autoShooter?.AddDamageMultiplierPercent(value);
+                break;
+            case LevelUpCardEffect.AtkUp:
+                playerStatus?.SetAttackUpPercent(value);
                 break;
             case LevelUpCardEffect.FireIntervalAdd:
                 autoShooter?.AddFireInterval(-value);

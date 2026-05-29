@@ -3,12 +3,13 @@ using UnityEngine;
 public class ProjectileController : MonoBehaviour
 {
     [SerializeField] private LayerMask enemyLayer;
-    [SerializeField, Min(0f)] private float projectileDamage = 10f;
+    [SerializeField, Min(0f)] private float damageMultiplier = 1f;
 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private Vector2 moveDirection = Vector2.right;
     private float moveSpeed;
+    private PlayerStatus playerStatus;
 
     private void Awake()
     {
@@ -21,11 +22,12 @@ public class ProjectileController : MonoBehaviour
         }
     }
 
-    public void Initialize(Vector2 direction, float speed, float lifetime, float damage, float projectileScale)
+    public void Initialize(Vector2 direction, float speed, float lifetime, PlayerStatus status, float multiplier, float projectileScale)
     {
         moveDirection = direction.normalized;
         moveSpeed = speed;
-        projectileDamage = damage;
+        playerStatus = status;
+        damageMultiplier = Mathf.Max(0f, multiplier);
         transform.localScale = Vector3.one * projectileScale;
 
         ApplySpriteOrientation(moveDirection);
@@ -63,9 +65,19 @@ public class ProjectileController : MonoBehaviour
         IDamageable damageable = other.GetComponent<IDamageable>();
         if (damageable != null)
         {
-            damageable.TakeDamage(projectileDamage);
+            damageable.TakeDamage(CalculateDamage());
             Destroy(gameObject);
         }
+    }
+
+    private float CalculateDamage()
+    {
+        if (playerStatus == null)
+        {
+            return 0f;
+        }
+
+        return playerStatus.CalculateDamage(damageMultiplier);
     }
 
     private bool CanHit(int targetLayer)
