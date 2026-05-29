@@ -30,6 +30,11 @@ public class AutoShooter : MonoBehaviour
 
     private void Update()
     {
+        if (GamePauseState.IsGameplayPaused)
+        {
+            return;
+        }
+
         UpdateAimDirection();
 
         if (projectilePrefab == null || Time.time < nextFireTime)

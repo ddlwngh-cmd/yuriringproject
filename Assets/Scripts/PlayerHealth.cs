@@ -35,6 +35,11 @@ public class PlayerHealth : MonoBehaviour
 
     public bool TryTakeDamage(float damage)
     {
+        if (GamePauseState.IsGameplayPaused)
+        {
+            return false;
+        }
+
         if (isDead || isInvincible || damage <= 0f)
         {
             return false;

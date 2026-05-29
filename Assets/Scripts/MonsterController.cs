@@ -42,6 +42,11 @@ public class MonsterController : MonoBehaviour, IDamageable
 
     private void Update()
     {
+        if (GamePauseState.IsGameplayPaused)
+        {
+            return;
+        }
+
         if (target == null)
         {
             return;
@@ -58,6 +63,11 @@ public class MonsterController : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
+        if (GamePauseState.IsGameplayPaused)
+        {
+            return;
+        }
+
         if (damage <= 0f)
         {
             return;
@@ -105,6 +115,11 @@ public class MonsterController : MonoBehaviour, IDamageable
 
     private void TryDamagePlayer(Collider2D playerCollider)
     {
+        if (GamePauseState.IsGameplayPaused)
+        {
+            return;
+        }
+
         PlayerHealth playerHealth = playerCollider.GetComponent<PlayerHealth>();
         if (playerHealth == null)
         {

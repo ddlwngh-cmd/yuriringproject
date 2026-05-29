@@ -11,6 +11,11 @@ public class ExpOrbController : MonoBehaviour
 
     private void Update()
     {
+        if (GamePauseState.IsGameplayPaused)
+        {
+            return;
+        }
+
         ExpDropManager manager = ExpDropManager.Instance;
         if (manager == null)
         {

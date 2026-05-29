@@ -34,6 +34,16 @@ public class ProjectileController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GamePauseState.IsGameplayPaused)
+        {
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector2.zero;
+            }
+
+            return;
+        }
+
         if (rb == null)
         {
             transform.position += (Vector3)(moveDirection * moveSpeed * Time.fixedDeltaTime);
