@@ -196,6 +196,13 @@ MonoBehaviour:
   moveSpeed: 2
   maxHP: 30
   attackDamage: 15
+  expOrbDropTable:
+  - orbPrefab: {fileID: 7016473678363136726, guid: 67c435b53c893384499c1321d80fb97d, type: 3}
+    dropChance: 1
+  - orbPrefab: {fileID: 7016473678363136726, guid: 3cdc484adf6f5d141b85314e46479a04, type: 3}
+    dropChance: 0.5
+  - orbPrefab: {fileID: 7016473678363136726, guid: 6d86551dd3d022d4292aaff7d6988fe1, type: 3}
+    dropChance: 0.2
 --- !u!114 &-6282132882323556741
 MonoBehaviour:
   m_ObjectHideFlags: 0

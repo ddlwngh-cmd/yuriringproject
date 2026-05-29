@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2761633451901799616}
   - component: {fileID: 8545177479363505154}
   - component: {fileID: 1484366272855596637}
+  - component: {fileID: 6108700483915190}
   m_Layer: 0
   m_Name: XPorb_silver
   m_TagString: Untagged
@@ -156,3 +157,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6108700483915190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7016473678363136726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd304f7a95cd427a9efdc43d00b4436d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExpOrbController
+  expValue: 5
+  moveSpeed: 6
