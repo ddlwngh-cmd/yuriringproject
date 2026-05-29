@@ -16,6 +16,16 @@ public class TopDownPlayerMovement : MonoBehaviour
         animator.SetBool("isMoving", false);
     }
 
+    public void AddMoveSpeed(float amount)
+    {
+        moveSpeed = Mathf.Max(0f, moveSpeed + amount);
+    }
+
+    public void AddMoveSpeedPercent(float percent)
+    {
+        moveSpeed = Mathf.Max(0f, moveSpeed * (1f + percent / 100f));
+    }
+
     private void Update()
     {
         if (GamePauseState.IsGameplayPaused)

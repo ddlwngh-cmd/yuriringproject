@@ -14,6 +14,8 @@ public class AutoShooter : MonoBehaviour
     [SerializeField] private float lifetime = 2f;
     [SerializeField] private float scale = 1f;
 
+    private const float MinFireInterval = 0.05f;
+
     private Vector2 lastInputDirection = Vector2.right;
     private Vector2 lastShotDirection = Vector2.right;
     private float nextFireTime;
@@ -26,6 +28,46 @@ public class AutoShooter : MonoBehaviour
         }
 
         nextFireTime = Time.time + fireInterval;
+    }
+
+    public void AddDamage(float amount)
+    {
+        damage = Mathf.Max(0f, damage + amount);
+    }
+
+    public void AddDamagePercent(float percent)
+    {
+        damage = Mathf.Max(0f, damage * (1f + percent / 100f));
+    }
+
+    public void AddFireInterval(float amount)
+    {
+        fireInterval = Mathf.Max(MinFireInterval, fireInterval + amount);
+    }
+
+    public void ReduceFireIntervalPercent(float percent)
+    {
+        fireInterval = Mathf.Max(MinFireInterval, fireInterval * (1f - percent / 100f));
+    }
+
+    public void AddProjectileSpeed(float amount)
+    {
+        speed = Mathf.Max(0f, speed + amount);
+    }
+
+    public void AddProjectileSpeedPercent(float percent)
+    {
+        speed = Mathf.Max(0f, speed * (1f + percent / 100f));
+    }
+
+    public void AddProjectileLifetime(float amount)
+    {
+        lifetime = Mathf.Max(0.01f, lifetime + amount);
+    }
+
+    public void AddProjectileScale(float amount)
+    {
+        scale = Mathf.Max(0.01f, scale + amount);
     }
 
     private void Update()
