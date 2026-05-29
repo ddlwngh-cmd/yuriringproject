@@ -5,10 +5,10 @@ public class ExpDropManager : MonoBehaviour
     public static ExpDropManager Instance { get; private set; }
 
     [SerializeField, Min(0f)] private float magnetRange = 2f;
-    [SerializeField, Min(0f)] private float currentExp;
+    [SerializeField] private PlayerExperiences playerExperiences;
 
     public float MagnetRange => magnetRange;
-    public float CurrentExp => currentExp;
+    public float CurrentExp => playerExperiences != null ? playerExperiences.CurrentExp : 0f;
 
     private void Awake()
     {
@@ -19,6 +19,11 @@ public class ExpDropManager : MonoBehaviour
         }
 
         Instance = this;
+    }
+
+    private void Start()
+    {
+        CachePlayerExperiences();
     }
 
     public bool IsPlayerInMagnetRange(Vector3 orbPosition)
@@ -46,6 +51,29 @@ public class ExpDropManager : MonoBehaviour
             return;
         }
 
-        currentExp += amount;
+        CachePlayerExperiences();
+        if (playerExperiences != null)
+        {
+            playerExperiences.AddExp(amount);
+        }
+    }
+
+    private void CachePlayerExperiences()
+    {
+        if (playerExperiences != null)
+        {
+            return;
+        }
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            playerExperiences = player.GetComponent<PlayerExperiences>();
+        }
+
+        if (playerExperiences == null)
+        {
+            playerExperiences = PlayerExperiences.Instance;
+        }
     }
 }
