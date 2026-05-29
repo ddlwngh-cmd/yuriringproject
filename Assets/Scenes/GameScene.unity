@@ -573,6 +573,7 @@ GameObject:
   - component: {fileID: 358002076}
   - component: {fileID: 358002077}
   - component: {fileID: 358002078}
+  - component: {fileID: 358002079}
   m_Layer: 8
   m_Name: player
   m_TagString: Player
@@ -744,9 +745,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AutoShooter
   projectilePrefab: {fileID: 4599216883332184583, guid: bd1a2651b2bc48b479899ae4126fc1f1, type: 3}
   spawnPoint: {fileID: 358002071}
+  playerStatus: {fileID: 358002079}
   fireInterval: 0.35
   minTurnCooldown: 0.1
-  damage: 15
+  damageMultiplier: 1
   speed: 7
   lifetime: 2
   scale: 1
@@ -823,6 +825,20 @@ MonoBehaviour:
   levelXpCsvResourcePath: LevelXp
   levelText: {fileID: 0}
   levelUpFullGaugeHoldSeconds: 0.3
+--- !u!114 &358002079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358002068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a39977c67ba848bc97f344ea02220e8b, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStatus
+  baseAttack: 15
+  currentAttack: 15
 --- !u!1 &360753818
 GameObject:
   m_ObjectHideFlags: 0
@@ -1390,6 +1406,12 @@ MonoBehaviour:
   - {fileID: 1202850850}
   - {fileID: 1145750999}
   - {fileID: 98719213}
+  autoShooter: {fileID: 358002075}
+  playerMovement: {fileID: 358002074}
+  playerHealth: {fileID: 358002076}
+  playerStatus: {fileID: 358002079}
+  levelUpCardCsvResourcePath: LevelUpCard
+  iconResourceFolder: Sprites
   pauseWithTimeScale: 1
 --- !u!1 &904861345
 GameObject:
