@@ -22,7 +22,8 @@ public enum LevelUpCardEffect
     MoveSpeedPercent,
     MaxHpAdd,
     Heal,
-    Magnet
+    Magnet,
+    FIRERING
 }
 
 [DisallowMultipleComponent]
@@ -54,6 +55,7 @@ public class LevelUpSelectionManager : MonoBehaviour
     [SerializeField] private TopDownPlayerMovement playerMovement;
     [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private PlayerStatus playerStatus;
+    [SerializeField] private FireRingController fireRingController;
 
     [Header("Data")]
     [SerializeField] private string levelUpCardCsvResourcePath = "LevelUpCard";
@@ -125,7 +127,7 @@ public class LevelUpSelectionManager : MonoBehaviour
         }
 
         GameObject player = null;
-        if (playerExperiences == null || autoShooter == null || playerMovement == null || playerHealth == null || playerStatus == null)
+        if (playerExperiences == null || autoShooter == null || playerMovement == null || playerHealth == null || playerStatus == null || fireRingController == null)
         {
             player = GameObject.FindGameObjectWithTag("Player");
         }
@@ -153,6 +155,11 @@ public class LevelUpSelectionManager : MonoBehaviour
         if (playerStatus == null && player != null)
         {
             playerStatus = player.GetComponent<PlayerStatus>();
+        }
+
+        if (fireRingController == null && player != null)
+        {
+            fireRingController = player.GetComponent<FireRingController>();
         }
 
         if (cardContainer == null)
@@ -347,6 +354,9 @@ public class LevelUpSelectionManager : MonoBehaviour
                 break;
             case LevelUpCardEffect.Magnet:
                 playerStatus?.SetPickupRadiusPercent(value);
+                break;
+            case LevelUpCardEffect.FIRERING:
+                fireRingController?.SetOrbCount(Mathf.RoundToInt(value));
                 break;
             case LevelUpCardEffect.Heal:
                 if (playerHealth != null)

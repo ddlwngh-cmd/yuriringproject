@@ -574,6 +574,7 @@ GameObject:
   - component: {fileID: 358002077}
   - component: {fileID: 358002078}
   - component: {fileID: 358002079}
+  - component: {fileID: 358002080}
   m_Layer: 8
   m_Name: player
   m_TagString: Player
@@ -844,6 +845,27 @@ MonoBehaviour:
   currentHP: 100
   basePickupRadius: 2
   currentPickupRadius: 2
+--- !u!114 &358002080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358002068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69279ed693f849bca730c9ae6526cb9d, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::FireRingController
+  orbitRadius: 3
+  orbitSpeed: 45
+  damageMultiplier: 1
+  damageCooldown: 0.35
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  fireOrbPrefab: {fileID: 1952676425178417937, guid: 980432fdb77ee3840bd3333db8845c6d, type: 3}
+  playerStatus: {fileID: 358002079}
 --- !u!1 &360753818
 GameObject:
   m_ObjectHideFlags: 0
@@ -1415,6 +1437,7 @@ MonoBehaviour:
   playerMovement: {fileID: 358002074}
   playerHealth: {fileID: 358002076}
   playerStatus: {fileID: 358002079}
+  fireRingController: {fileID: 358002080}
   levelUpCardCsvResourcePath: LevelUpCard
   iconResourceFolder: Sprites
   pauseWithTimeScale: 1
