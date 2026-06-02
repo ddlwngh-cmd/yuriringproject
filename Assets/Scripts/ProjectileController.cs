@@ -65,7 +65,7 @@ public class ProjectileController : MonoBehaviour
         IDamageable damageable = other.GetComponent<IDamageable>();
         if (damageable != null)
         {
-            damageable.TakeDamage(CalculateDamage());
+            DamageSystem.ApplyDamage(playerStatus, damageable, CalculateDamage());
             Destroy(gameObject);
         }
     }

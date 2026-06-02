@@ -345,7 +345,14 @@ public class LevelUpSelectionManager : MonoBehaviour
                 Debug.LogWarning("MaxHpAdd is deprecated. Use HPUP with a percentage value instead.");
                 break;
             case LevelUpCardEffect.Heal:
-                playerHealth?.Heal(value);
+                if (playerHealth != null)
+                {
+                    playerHealth.SetDamageHealPercent(value);
+                }
+                else
+                {
+                    playerStatus?.SetDamageHealPercent(value);
+                }
                 break;
             case LevelUpCardEffect.None:
                 break;
