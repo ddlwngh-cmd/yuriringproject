@@ -1,9 +1,4 @@
-ID,Ratio,Required,Icon,Desc,Effect,Value
-1,35,,Skill_ATKUPgrade,공격력이 25% 강화됩니다.,ATKUP,125
-2,25,1,Skill_ATKUPgrade,공격력이 50% 강화됩니다.,ATKUP,150
-3,25,,Skill_ATKUPgrade,공격 속도가 10% 증가합니다.,FireIntervalPercent,10
-4,20,,Skill_ATKUPgrade,투사체 속도가 1 증가합니다.,ProjectileSpeedAdd,1
-5,20,,Skill_ATKUPgrade,투사체 크기가 0.2 증가합니다.,ProjectileScaleAdd,0.2
-6,20,,Skill_ATKUPgrade,이동 속도가 10% 증가합니다.,MoveSpeedPercent,10
-7,15,,Skill_ATKUPgrade,최대 체력이 20 증가하고 회복합니다.,MaxHpAdd,20
-8,15,7,Skill_ATKUPgrade,체력을 30 회복합니다.,Heal,30
+﻿ID,Ratio,Required,Icon,Desc,Effect,Value
+1,35,,Skill_ATKUPgrade,공격력이 150% 됩니다.,ATKUP,150
+2,25,1,Skill_ATKUPgrade,공격력이 200% 됩니다.,ATKUP,200
+3,25,2,Skill_ATKUPgrade,공격력이 250% 됩니다.,ATKUP,250
