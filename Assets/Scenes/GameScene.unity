@@ -855,10 +855,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69279ed693f849bca730c9ae6526cb9d, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireRingController
   orbitRadius: 3
-  orbitSpeed: 45
+  orbitSpeed: 90
   damageMultiplier: 1
   damageCooldown: 0.35
   enemyLayer:

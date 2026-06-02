@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7466085822692916112}
   - component: {fileID: 3994515229015527392}
   m_Layer: 0
-  m_Name: RINGEffect
+  m_Name: ExplosionEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
