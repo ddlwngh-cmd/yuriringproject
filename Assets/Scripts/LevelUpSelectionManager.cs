@@ -504,10 +504,10 @@ public class LevelUpSelectionManager : MonoBehaviour
             return cachedIcon;
         }
 
-        Sprite icon = Resources.Load<Sprite>($"{iconResourceFolder}/{iconName}");
+        Sprite icon = LoadIconFromResources($"{iconResourceFolder}/{iconName}", iconName);
         if (icon == null)
         {
-            icon = Resources.Load<Sprite>(iconName);
+            icon = LoadIconFromResources(iconName, iconName);
         }
 
         if (icon == null)
@@ -530,6 +530,31 @@ public class LevelUpSelectionManager : MonoBehaviour
 
         iconCache[iconName] = icon;
         return icon;
+    }
+
+    private static Sprite LoadIconFromResources(string resourcePath, string iconName)
+    {
+        Sprite icon = Resources.Load<Sprite>(resourcePath);
+        if (icon != null)
+        {
+            return icon;
+        }
+
+        Sprite[] sprites = Resources.LoadAll<Sprite>(resourcePath);
+        if (sprites == null || sprites.Length == 0)
+        {
+            return null;
+        }
+
+        for (int i = 0; i < sprites.Length; i++)
+        {
+            if (sprites[i].name == iconName)
+            {
+                return sprites[i];
+            }
+        }
+
+        return sprites[0];
     }
 
     private void ClosePanel()
