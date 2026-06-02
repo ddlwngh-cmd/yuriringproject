@@ -34,6 +34,16 @@ public class PlayerHealth : MonoBehaviour
         UpdateHPUI();
     }
 
+    private void OnEnable()
+    {
+        DamageSystem.DamageApplied += OnDamageApplied;
+    }
+
+    private void OnDisable()
+    {
+        DamageSystem.DamageApplied -= OnDamageApplied;
+    }
+
     public bool TryTakeDamage(float damage)
     {
         if (GamePauseState.IsGameplayPaused)
@@ -87,6 +97,32 @@ public class PlayerHealth : MonoBehaviour
         UpdateHPUI();
     }
 
+    public void SetDamageHealPercent(float percentValue)
+    {
+        if (playerStatus == null)
+        {
+            return;
+        }
+
+        playerStatus.SetDamageHealPercent(percentValue);
+    }
+
+    private void OnDamageApplied(DamageSystem.DamageAppliedEventArgs eventArgs)
+    {
+        if (isDead || playerStatus == null || eventArgs.SourcePlayerStatus != playerStatus)
+        {
+            return;
+        }
+
+        float healAmount = eventArgs.AppliedDamage * (playerStatus.DamageHealPercent / 100f);
+        if (healAmount <= 0f)
+        {
+            return;
+        }
+
+        playerStatus.Heal(healAmount);
+        UpdateHPUI();
+    }
 
     private void ResolvePlayerStatus()
     {

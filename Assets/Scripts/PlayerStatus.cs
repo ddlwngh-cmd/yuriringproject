@@ -14,12 +14,14 @@ public class PlayerStatus : MonoBehaviour
 
     private float attackUpMultiplier = 1f;
     private float maxHPUpMultiplier = 1f;
+    private float damageHealPercent;
 
     public float BaseAttack => baseAttack;
     public float CurrentAttack => currentAttack;
     public float BaseMaxHP => baseMaxHP;
     public float CurrentMaxHP => currentMaxHP;
     public float CurrentHP => currentHP;
+    public float DamageHealPercent => damageHealPercent;
 
     private void Awake()
     {
@@ -33,6 +35,7 @@ public class PlayerStatus : MonoBehaviour
         attackUpMultiplier = Mathf.Max(0f, attackUpMultiplier);
         baseMaxHP = Mathf.Max(1f, baseMaxHP);
         maxHPUpMultiplier = Mathf.Max(0f, maxHPUpMultiplier);
+        damageHealPercent = Mathf.Max(0f, damageHealPercent);
         RecalculateCurrentAttack();
 
         if (!Application.isPlaying)
@@ -52,6 +55,7 @@ public class PlayerStatus : MonoBehaviour
         maxHPUpMultiplier = 1f;
         currentMaxHP = baseMaxHP;
         currentHP = currentMaxHP;
+        damageHealPercent = 0f;
     }
 
     public void SetMaxHPUpPercent(float percentValue)
@@ -64,14 +68,21 @@ public class PlayerStatus : MonoBehaviour
         currentHP = Mathf.Min(currentMaxHP, Mathf.Max(0f, currentHP * healthScale));
     }
 
-    public void TakeDamage(float damage)
+    public float TakeDamage(float damage)
     {
         if (damage <= 0f)
         {
-            return;
+            return 0f;
         }
 
+        float previousHP = currentHP;
         currentHP = Mathf.Max(0f, currentHP - damage);
+        return previousHP - currentHP;
+    }
+
+    public void SetDamageHealPercent(float percentValue)
+    {
+        damageHealPercent = Mathf.Max(0f, percentValue);
     }
 
     public void Heal(float amount)

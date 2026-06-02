@@ -61,24 +61,28 @@ public class MonsterController : MonoBehaviour, IDamageable
         transform.position += direction.normalized * moveSpeed * Time.deltaTime;
     }
 
-    public void TakeDamage(float damage)
+    public float TakeDamage(float damage)
     {
         if (GamePauseState.IsGameplayPaused)
         {
-            return;
+            return 0f;
         }
 
         if (damage <= 0f)
         {
-            return;
+            return 0f;
         }
 
+        float previousHP = currentHP;
         currentHP = Mathf.Max(0f, currentHP - damage);
+        float appliedDamage = previousHP - currentHP;
         if (currentHP <= 0f)
         {
             DropExpOrbs();
             Destroy(gameObject);
         }
+
+        return appliedDamage;
     }
 
     private void DropExpOrbs()
