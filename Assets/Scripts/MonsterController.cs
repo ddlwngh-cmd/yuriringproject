@@ -17,6 +17,9 @@ public class MonsterController : MonoBehaviour, IDamageable
 
     private Transform target;
     private float currentHP;
+    private bool isDead;
+
+    public bool IsDead => isDead;
 
     private void Awake()
     {
@@ -68,7 +71,7 @@ public class MonsterController : MonoBehaviour, IDamageable
             return 0f;
         }
 
-        if (damage <= 0f)
+        if (isDead || damage <= 0f)
         {
             return 0f;
         }
@@ -78,11 +81,22 @@ public class MonsterController : MonoBehaviour, IDamageable
         float appliedDamage = previousHP - currentHP;
         if (currentHP <= 0f)
         {
-            DropExpOrbs();
-            Destroy(gameObject);
+            Die();
         }
 
         return appliedDamage;
+    }
+
+    private void Die()
+    {
+        if (isDead)
+        {
+            return;
+        }
+
+        isDead = true;
+        DropExpOrbs();
+        Destroy(gameObject);
     }
 
     private void DropExpOrbs()

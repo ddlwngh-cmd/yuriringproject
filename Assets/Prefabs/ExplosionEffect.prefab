@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7466085822692916112}
   - component: {fileID: 3994515229015527392}
+  - component: {fileID: 8836143522265388441}
   m_Layer: 0
   m_Name: ExplosionEffect
   m_TagString: Untagged
@@ -91,3 +92,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &8836143522265388441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4261561993416222509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 918ad25df68e4e19afc2cb184339aaf9, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ExplosionEffectController
+  effectSize: 6
+  effectLifeTime: 0.35
+  startScaleRatio: 0.15

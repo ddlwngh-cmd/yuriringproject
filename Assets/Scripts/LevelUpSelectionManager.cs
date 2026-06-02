@@ -23,7 +23,8 @@ public enum LevelUpCardEffect
     MaxHpAdd,
     Heal,
     Magnet,
-    FIRERING
+    FIRERING,
+    EXPLOSION
 }
 
 [DisallowMultipleComponent]
@@ -56,6 +57,7 @@ public class LevelUpSelectionManager : MonoBehaviour
     [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private PlayerStatus playerStatus;
     [SerializeField] private FireRingController fireRingController;
+    [SerializeField] private ExplosionController explosionController;
 
     [Header("Data")]
     [SerializeField] private string levelUpCardCsvResourcePath = "LevelUpCard";
@@ -127,7 +129,7 @@ public class LevelUpSelectionManager : MonoBehaviour
         }
 
         GameObject player = null;
-        if (playerExperiences == null || autoShooter == null || playerMovement == null || playerHealth == null || playerStatus == null || fireRingController == null)
+        if (playerExperiences == null || autoShooter == null || playerMovement == null || playerHealth == null || playerStatus == null || fireRingController == null || explosionController == null)
         {
             player = GameObject.FindGameObjectWithTag("Player");
         }
@@ -160,6 +162,11 @@ public class LevelUpSelectionManager : MonoBehaviour
         if (fireRingController == null && player != null)
         {
             fireRingController = player.GetComponent<FireRingController>();
+        }
+
+        if (explosionController == null && player != null)
+        {
+            explosionController = player.GetComponent<ExplosionController>();
         }
 
         if (cardContainer == null)
@@ -357,6 +364,9 @@ public class LevelUpSelectionManager : MonoBehaviour
                 break;
             case LevelUpCardEffect.FIRERING:
                 fireRingController?.SetOrbCount(Mathf.RoundToInt(value));
+                break;
+            case LevelUpCardEffect.EXPLOSION:
+                explosionController?.SetExplosionChancePercent(value);
                 break;
             case LevelUpCardEffect.Heal:
                 if (playerHealth != null)
