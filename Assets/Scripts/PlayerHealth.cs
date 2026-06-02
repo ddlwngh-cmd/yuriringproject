@@ -3,10 +3,11 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(PlayerStatus))]
 public class PlayerHealth : MonoBehaviour
 {
     [Header("Health")]
-    [SerializeField, Min(1f)] private float maxHP = 100f;
+    [SerializeField] private PlayerStatus playerStatus;
     [SerializeField, Min(0f)] private float invincibleTime = 1f;
     [SerializeField] private Image hpBar;
 
@@ -16,19 +17,19 @@ public class PlayerHealth : MonoBehaviour
     [Header("Events")]
     [SerializeField] private UnityEvent onDeath;
 
-    private float currentHP;
     private bool isDead;
     private bool isInvincible;
     private Coroutine invincibleRoutine;
     private SpriteRenderer[] spriteRenderers;
 
-    public float MaxHP => maxHP;
-    public float CurrentHP => currentHP;
+    public float MaxHP => playerStatus != null ? playerStatus.CurrentMaxHP : 0f;
+    public float CurrentHP => playerStatus != null ? playerStatus.CurrentHP : 0f;
     public bool IsInvincible => isInvincible;
 
     private void Awake()
     {
-        currentHP = maxHP;
+        ResolvePlayerStatus();
+        playerStatus?.InitializeHealthForBattle();
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
         UpdateHPUI();
     }
@@ -40,15 +41,15 @@ public class PlayerHealth : MonoBehaviour
             return false;
         }
 
-        if (isDead || isInvincible || damage <= 0f)
+        if (isDead || isInvincible || damage <= 0f || playerStatus == null)
         {
             return false;
         }
 
-        currentHP = Mathf.Max(0f, currentHP - damage);
+        playerStatus.TakeDamage(damage);
         UpdateHPUI();
 
-        if (currentHP <= 0f)
+        if (playerStatus.CurrentHP <= 0f)
         {
             Die();
             return true;
@@ -66,34 +67,33 @@ public class PlayerHealth : MonoBehaviour
 
     public void Heal(float amount)
     {
-        if (isDead || amount <= 0f)
+        if (isDead || amount <= 0f || playerStatus == null)
         {
             return;
         }
 
-        currentHP = Mathf.Min(maxHP, currentHP + amount);
+        playerStatus.Heal(amount);
         UpdateHPUI();
     }
 
-    public void IncreaseMaxHP(float amount, bool healByIncrease = true)
+    public void SetMaxHPUpPercent(float percentValue)
     {
-        if (amount <= 0f)
+        if (isDead || playerStatus == null)
         {
             return;
         }
 
-        maxHP += amount;
-
-        if (healByIncrease)
-        {
-            currentHP = Mathf.Min(maxHP, currentHP + amount);
-        }
-        else
-        {
-            currentHP = Mathf.Min(currentHP, maxHP);
-        }
-
+        playerStatus.SetMaxHPUpPercent(percentValue);
         UpdateHPUI();
+    }
+
+
+    private void ResolvePlayerStatus()
+    {
+        if (playerStatus == null)
+        {
+            playerStatus = GetComponent<PlayerStatus>();
+        }
     }
 
     private IEnumerator InvincibleCoroutine()
@@ -122,7 +122,8 @@ public class PlayerHealth : MonoBehaviour
             return;
         }
 
-        hpBar.fillAmount = maxHP <= 0f ? 0f : currentHP / maxHP;
+        float maxHP = MaxHP;
+        hpBar.fillAmount = maxHP <= 0f ? 0f : CurrentHP / maxHP;
     }
 
     private void SetSpritesVisible(bool visible)
