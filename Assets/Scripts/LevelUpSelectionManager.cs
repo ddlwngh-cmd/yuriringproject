@@ -11,6 +11,7 @@ public enum LevelUpCardEffect
     DamageAdd,
     DamagePercent,
     AtkUp,
+    HPUP,
     FireIntervalAdd,
     FireIntervalPercent,
     ProjectileSpeedAdd,
@@ -306,6 +307,16 @@ public class LevelUpSelectionManager : MonoBehaviour
             case LevelUpCardEffect.AtkUp:
                 playerStatus?.SetAttackUpPercent(value);
                 break;
+            case LevelUpCardEffect.HPUP:
+                if (playerHealth != null)
+                {
+                    playerHealth.SetMaxHPUpPercent(value);
+                }
+                else
+                {
+                    playerStatus?.SetMaxHPUpPercent(value);
+                }
+                break;
             case LevelUpCardEffect.FireIntervalAdd:
                 autoShooter?.AddFireInterval(-value);
                 break;
@@ -331,7 +342,7 @@ public class LevelUpSelectionManager : MonoBehaviour
                 playerMovement?.AddMoveSpeedPercent(value);
                 break;
             case LevelUpCardEffect.MaxHpAdd:
-                playerHealth?.IncreaseMaxHP(value);
+                Debug.LogWarning("MaxHpAdd is deprecated. Use HPUP with a percentage value instead.");
                 break;
             case LevelUpCardEffect.Heal:
                 playerHealth?.Heal(value);

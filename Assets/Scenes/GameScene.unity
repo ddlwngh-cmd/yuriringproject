@@ -764,7 +764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 499ecec90c2e3824eacb93446e16bcb0, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  maxHP: 100
+  playerStatus: {fileID: 358002079}
   invincibleTime: 0.5
   hpBar: {fileID: 1664760154}
   blinkInterval: 0.1
@@ -839,6 +839,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatus
   baseAttack: 15
   currentAttack: 15
+  baseMaxHP: 100
+  currentMaxHP: 100
+  currentHP: 100
 --- !u!1 &360753818
 GameObject:
   m_ObjectHideFlags: 0
