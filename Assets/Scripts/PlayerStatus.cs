@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [DisallowMultipleComponent]
@@ -12,8 +13,13 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField, Min(1f)] private float currentMaxHP;
     [SerializeField, Min(0f)] private float currentHP;
 
+    [Header("Pickup")]
+    [SerializeField, Min(0f)] private float basePickupRadius = 2f;
+    [SerializeField, Min(0f)] private float currentPickupRadius;
+
     private float attackUpMultiplier = 1f;
     private float maxHPUpMultiplier = 1f;
+    private float pickupRadiusMultiplier = 1f;
     private float damageHealPercent;
 
     public float BaseAttack => baseAttack;
@@ -21,11 +27,16 @@ public class PlayerStatus : MonoBehaviour
     public float BaseMaxHP => baseMaxHP;
     public float CurrentMaxHP => currentMaxHP;
     public float CurrentHP => currentHP;
+    public float BasePickupRadius => basePickupRadius;
+    public float CurrentPickupRadius => currentPickupRadius;
     public float DamageHealPercent => damageHealPercent;
+
+    public event Action<float> PickupRadiusChanged;
 
     private void Awake()
     {
         RecalculateCurrentAttack();
+        RecalculateCurrentPickupRadius(false);
         InitializeHealthForBattle();
     }
 
@@ -35,8 +46,11 @@ public class PlayerStatus : MonoBehaviour
         attackUpMultiplier = Mathf.Max(0f, attackUpMultiplier);
         baseMaxHP = Mathf.Max(1f, baseMaxHP);
         maxHPUpMultiplier = Mathf.Max(0f, maxHPUpMultiplier);
+        basePickupRadius = Mathf.Max(0f, basePickupRadius);
+        pickupRadiusMultiplier = Mathf.Max(0f, pickupRadiusMultiplier);
         damageHealPercent = Mathf.Max(0f, damageHealPercent);
         RecalculateCurrentAttack();
+        RecalculateCurrentPickupRadius(false);
 
         if (!Application.isPlaying)
         {
@@ -56,6 +70,17 @@ public class PlayerStatus : MonoBehaviour
         currentMaxHP = baseMaxHP;
         currentHP = currentMaxHP;
         damageHealPercent = 0f;
+    }
+
+    public void SetPickupRadiusPercent(float percentValue)
+    {
+        pickupRadiusMultiplier = Mathf.Max(0f, percentValue / 100f);
+        RecalculateCurrentPickupRadius(true);
+    }
+
+    public void RefreshPickupRadius()
+    {
+        RecalculateCurrentPickupRadius(true);
     }
 
     public void SetMaxHPUpPercent(float percentValue)
@@ -103,6 +128,17 @@ public class PlayerStatus : MonoBehaviour
     private void RecalculateCurrentAttack()
     {
         currentAttack = baseAttack * attackUpMultiplier;
+    }
+
+    private void RecalculateCurrentPickupRadius(bool notify)
+    {
+        float previousPickupRadius = currentPickupRadius;
+        currentPickupRadius = basePickupRadius * pickupRadiusMultiplier;
+
+        if (notify && !Mathf.Approximately(previousPickupRadius, currentPickupRadius))
+        {
+            PickupRadiusChanged?.Invoke(currentPickupRadius);
+        }
     }
 
     private void ResetHealthPreview()

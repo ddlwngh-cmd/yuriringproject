@@ -21,7 +21,8 @@ public enum LevelUpCardEffect
     MoveSpeedAdd,
     MoveSpeedPercent,
     MaxHpAdd,
-    Heal
+    Heal,
+    Magnet
 }
 
 [DisallowMultipleComponent]
@@ -343,6 +344,9 @@ public class LevelUpSelectionManager : MonoBehaviour
                 break;
             case LevelUpCardEffect.MaxHpAdd:
                 Debug.LogWarning("MaxHpAdd is deprecated. Use HPUP with a percentage value instead.");
+                break;
+            case LevelUpCardEffect.Magnet:
+                playerStatus?.SetPickupRadiusPercent(value);
                 break;
             case LevelUpCardEffect.Heal:
                 if (playerHealth != null)
