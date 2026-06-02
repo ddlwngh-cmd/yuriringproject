@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ExpDropManager : MonoBehaviour
@@ -6,9 +7,16 @@ public class ExpDropManager : MonoBehaviour
 
     [SerializeField, Min(0f)] private float magnetRange = 2f;
     [SerializeField] private PlayerExperiences playerExperiences;
+    [SerializeField] private PlayerStatus playerStatus;
 
-    public float MagnetRange => magnetRange;
+    private Transform playerTransform;
+    private float cachedPickupRadius;
+
+    public float MagnetRange => CurrentPickupRadius;
+    public float CurrentPickupRadius => cachedPickupRadius;
     public float CurrentExp => playerExperiences != null ? playerExperiences.CurrentExp : 0f;
+
+    public event Action<float> PickupRadiusChanged;
 
     private void Awake()
     {
@@ -19,29 +27,54 @@ public class ExpDropManager : MonoBehaviour
         }
 
         Instance = this;
+        cachedPickupRadius = magnetRange;
+        CachePlayerReferences();
+        SubscribeToPlayerStatus();
+        RefreshPickupRadius();
     }
 
     private void Start()
     {
-        CachePlayerExperiences();
+        CachePlayerReferences();
+        SubscribeToPlayerStatus();
+        RefreshPickupRadius();
     }
 
-    public bool IsPlayerInMagnetRange(Vector3 orbPosition)
+    private void OnDestroy()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player == null)
+        if (Instance == this)
         {
-            return false;
+            Instance = null;
         }
 
-        float distance = Vector3.Distance(player.transform.position, orbPosition);
-        return distance <= magnetRange;
+        UnsubscribeFromPlayerStatus();
+    }
+
+    public bool IsPlayerInMagnetRange(Vector3 collectiblePosition)
+    {
+        return GetPlayerTransformIfInPickupRange(collectiblePosition) != null;
+    }
+
+    public Transform GetPlayerTransformIfInPickupRange(Vector3 collectiblePosition)
+    {
+        Transform player = GetPlayerTransform();
+        if (player == null)
+        {
+            return null;
+        }
+
+        float pickupRadius = CurrentPickupRadius;
+        return (player.position - collectiblePosition).sqrMagnitude <= pickupRadius * pickupRadius ? player : null;
     }
 
     public Transform GetPlayerTransform()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        return player != null ? player.transform : null;
+        if (playerTransform == null)
+        {
+            CachePlayerReferences();
+        }
+
+        return playerTransform;
     }
 
     public void AddExp(float amount)
@@ -56,29 +89,91 @@ public class ExpDropManager : MonoBehaviour
             return;
         }
 
-        CachePlayerExperiences();
+        CachePlayerReferences();
         if (playerExperiences != null)
         {
             playerExperiences.AddExp(amount);
         }
     }
 
-    private void CachePlayerExperiences()
+    public void RefreshPickupRadius()
     {
-        if (playerExperiences != null)
+        if (playerStatus != null)
         {
+            playerStatus.RefreshPickupRadius();
+            cachedPickupRadius = playerStatus.CurrentPickupRadius;
             return;
         }
 
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
+        float previousPickupRadius = cachedPickupRadius;
+        cachedPickupRadius = magnetRange;
+
+        if (!Mathf.Approximately(previousPickupRadius, cachedPickupRadius))
+        {
+            PickupRadiusChanged?.Invoke(cachedPickupRadius);
+        }
+    }
+
+    private void CachePlayerReferences()
+    {
+        GameObject player = null;
+        if (playerTransform == null || playerExperiences == null || playerStatus == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+
+        if (playerTransform == null && player != null)
+        {
+            playerTransform = player.transform;
+        }
+
+        if (playerExperiences == null && player != null)
         {
             playerExperiences = player.GetComponent<PlayerExperiences>();
+        }
+
+        if (playerStatus == null && player != null)
+        {
+            playerStatus = player.GetComponent<PlayerStatus>();
         }
 
         if (playerExperiences == null)
         {
             playerExperiences = PlayerExperiences.Instance;
+            if (playerExperiences != null && playerTransform == null)
+            {
+                playerTransform = playerExperiences.transform;
+            }
         }
+
+        if (playerStatus == null && playerTransform != null)
+        {
+            playerStatus = playerTransform.GetComponent<PlayerStatus>();
+        }
+    }
+
+    private void SubscribeToPlayerStatus()
+    {
+        if (playerStatus == null)
+        {
+            return;
+        }
+
+        playerStatus.PickupRadiusChanged -= OnPlayerPickupRadiusChanged;
+        playerStatus.PickupRadiusChanged += OnPlayerPickupRadiusChanged;
+    }
+
+    private void UnsubscribeFromPlayerStatus()
+    {
+        if (playerStatus != null)
+        {
+            playerStatus.PickupRadiusChanged -= OnPlayerPickupRadiusChanged;
+        }
+    }
+
+    private void OnPlayerPickupRadiusChanged(float pickupRadius)
+    {
+        cachedPickupRadius = pickupRadius;
+        PickupRadiusChanged?.Invoke(cachedPickupRadius);
     }
 }

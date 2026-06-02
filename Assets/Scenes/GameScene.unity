@@ -842,6 +842,8 @@ MonoBehaviour:
   baseMaxHP: 100
   currentMaxHP: 100
   currentHP: 100
+  basePickupRadius: 2
+  currentPickupRadius: 2
 --- !u!1 &360753818
 GameObject:
   m_ObjectHideFlags: 0
@@ -2031,6 +2033,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExpDropManager
   magnetRange: 2
   playerExperiences: {fileID: 0}
+  playerStatus: {fileID: 358002079}
 --- !u!4 &1590870674
 Transform:
   m_ObjectHideFlags: 0
