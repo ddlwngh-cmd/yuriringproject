@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9035661817889837623}
   - component: {fileID: 1899879019533127303}
   - component: {fileID: 3330902421948670464}
+  - component: {fileID: 4078637539639230233}
   m_Layer: 0
   m_Name: Potion
   m_TagString: MagnetCollectible
@@ -156,3 +157,16 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0.08262253, y: -0.2596426}
   m_Radius: 2.5510826
+--- !u!114 &4078637539639230233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3449660827323929819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba21573885344a2a89478c0006e2be3d, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  healValue: 20
