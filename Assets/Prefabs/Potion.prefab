@@ -167,6 +167,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba21573885344a2a89478c0006e2be3d, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  healValue: 20
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 6
+  collectDistance: 0.1
+  healValue: 40
