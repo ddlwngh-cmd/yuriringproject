@@ -576,6 +576,7 @@ GameObject:
   - component: {fileID: 358002079}
   - component: {fileID: 358002080}
   - component: {fileID: 358002081}
+  - component: {fileID: 358002082}
   m_Layer: 8
   m_Name: player
   m_TagString: Player
@@ -887,6 +888,20 @@ MonoBehaviour:
   explosionChancePercent: 0
   effectPrefab: {fileID: 8836143522265388441, guid: 22d238623c800b24e86213a4121e19c3, type: 3}
   playerStatus: {fileID: 358002079}
+--- !u!114 &358002082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358002068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d5d42a0f1ac4bb19d1bf860bb26e4c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MagnetBoostController
+  boostDuration: 5
+  boostSpeedMultiplier: 4
 --- !u!1 &360753818
 GameObject:
   m_ObjectHideFlags: 0
