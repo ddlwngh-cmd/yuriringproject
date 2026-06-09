@@ -53,6 +53,11 @@ public class MonsterSpawnManager : MonoBehaviour
 
     private void Start()
     {
+        if (StageSelectionState.HasSelection)
+        {
+            stageId = StageSelectionState.SelectedStage.StageId;
+        }
+
         if (playerTarget == null)
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");

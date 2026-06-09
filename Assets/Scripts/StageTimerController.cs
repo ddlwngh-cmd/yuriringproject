@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Globalization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,12 +11,6 @@ public class StageTimerController : MonoBehaviour
         InProgress,
         Success,
         Failure
-    }
-
-    private sealed class StageRow
-    {
-        public int StageId;
-        public float Time;
     }
 
     [Header("Stage")]
@@ -144,15 +135,15 @@ public class StageTimerController : MonoBehaviour
 
     private bool TryLoadStageTime()
     {
-        TextAsset csv = Resources.Load<TextAsset>(stageCsvResourcePath);
-        if (csv == null)
+        if (StageSelectionState.HasSelection)
         {
-            Debug.LogError($"StageTimerController could not load CSV at Resources/{stageCsvResourcePath}.csv");
-            return false;
+            stageId = StageSelectionState.SelectedStage.StageId;
+            remainingTime = Mathf.Max(0f, StageSelectionState.SelectedStage.Time);
+            return true;
         }
 
-        List<StageRow> rows = ParseCsv(csv.text);
-        StageRow currentStage = rows.Find(row => row.StageId == stageId);
+        StageData currentStage = StageDataRepository.Load(stageCsvResourcePath)
+            .Find(row => row.StageId == stageId);
         if (currentStage == null)
         {
             Debug.LogError($"StageTimerController could not find StageId={stageId} in Resources/{stageCsvResourcePath}.csv");
@@ -161,59 +152,6 @@ public class StageTimerController : MonoBehaviour
 
         remainingTime = Mathf.Max(0f, currentStage.Time);
         return true;
-    }
-
-    private static List<StageRow> ParseCsv(string csvText)
-    {
-        List<StageRow> rows = new();
-        string[] lines = csvText.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-        if (lines.Length < 2)
-        {
-            return rows;
-        }
-
-        string[] headers = lines[0].Split(',');
-        int stageIdIndex = FindColumnIndex(headers, "StageId");
-        int timeIndex = FindColumnIndex(headers, "Time");
-        if (stageIdIndex < 0 || timeIndex < 0)
-        {
-            Debug.LogError("Stage.csv must contain StageId and Time columns.");
-            return rows;
-        }
-
-        int requiredColumnCount = Mathf.Max(stageIdIndex, timeIndex) + 1;
-        for (int i = 1; i < lines.Length; i++)
-        {
-            string[] columns = lines[i].Split(',');
-            if (columns.Length < requiredColumnCount
-                || !int.TryParse(columns[stageIdIndex].Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out int parsedStageId)
-                || !float.TryParse(columns[timeIndex].Trim(), NumberStyles.Float, CultureInfo.InvariantCulture, out float parsedTime))
-            {
-                Debug.LogWarning($"StageTimerController skipped invalid Stage.csv row {i + 1}: {lines[i]}");
-                continue;
-            }
-
-            rows.Add(new StageRow
-            {
-                StageId = parsedStageId,
-                Time = Mathf.Max(0f, parsedTime)
-            });
-        }
-
-        return rows;
-    }
-
-    private static int FindColumnIndex(string[] headers, string columnName)
-    {
-        for (int i = 0; i < headers.Length; i++)
-        {
-            if (string.Equals(headers[i].Trim(), columnName, StringComparison.OrdinalIgnoreCase))
-            {
-                return i;
-            }
-        }
-
-        return -1;
     }
 
     private void OnPlayerDied()

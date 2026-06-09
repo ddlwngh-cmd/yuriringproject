@@ -3609,6 +3609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InfiniteTilemapStreamer
   defaultTilemapPrefab: {fileID: 1585011894}
+  tilemapResourceFolder: Prefabs
   cameraTarget: {fileID: 428260929}
   preloadRadius: 1
 --- !u!1 &2059214301

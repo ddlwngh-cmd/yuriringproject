@@ -4,14 +4,18 @@ using UnityEngine;
 public class InfiniteTilemapStreamer : MonoBehaviour
 {
     [SerializeField] private GameObject defaultTilemapPrefab;
+    [SerializeField] private string tilemapResourceFolder = "Prefabs";
     [SerializeField] private Transform cameraTarget;
     [SerializeField, Min(0)] private int preloadRadius = 1;
 
     private readonly Dictionary<Vector2Int, GameObject> spawnedChunks = new();
     private Vector2 chunkSize;
+    private string tilemapName;
 
     private void Start()
     {
+        ApplySelectedStageTilemap();
+
         if (defaultTilemapPrefab == null)
         {
             Debug.LogError("InfiniteTilemapStreamer requires a defaultTilemapPrefab.");
@@ -35,6 +39,7 @@ public class InfiniteTilemapStreamer : MonoBehaviour
             return;
         }
 
+        tilemapName = defaultTilemapPrefab.name;
         chunkSize = ResolveChunkSize(defaultTilemapPrefab);
         if (chunkSize.x <= 0f || chunkSize.y <= 0f)
         {
@@ -44,6 +49,31 @@ public class InfiniteTilemapStreamer : MonoBehaviour
         }
 
         RefreshChunks();
+    }
+
+    private void ApplySelectedStageTilemap()
+    {
+        if (!StageSelectionState.HasSelection || string.IsNullOrWhiteSpace(StageSelectionState.SelectedStage.Tilemap))
+        {
+            return;
+        }
+
+        string tilemap = StageSelectionState.SelectedStage.Tilemap;
+        string resourcePath = string.IsNullOrWhiteSpace(tilemapResourceFolder)
+            ? tilemap
+            : $"{tilemapResourceFolder.TrimEnd('/')}/{tilemap}";
+        GameObject selectedPrefab = Resources.Load<GameObject>(resourcePath);
+        if (selectedPrefab == null)
+        {
+            Debug.LogError($"Could not load selected tilemap at Resources/{resourcePath}.prefab");
+            return;
+        }
+
+        defaultTilemapPrefab = selectedPrefab;
+        for (int i = transform.childCount - 1; i >= 0; i--)
+        {
+            transform.GetChild(i).gameObject.SetActive(false);
+        }
     }
 
     private void LateUpdate()
@@ -78,7 +108,7 @@ public class InfiniteTilemapStreamer : MonoBehaviour
 
         Vector3 spawnPosition = new(chunkCoord.x * chunkSize.x, chunkCoord.y * chunkSize.y, 0f);
         GameObject chunk = Instantiate(defaultTilemapPrefab, spawnPosition, Quaternion.identity, transform);
-        chunk.name = $"Tilemap1_{chunkCoord.x}_{chunkCoord.y}";
+        chunk.name = $"{tilemapName}_{chunkCoord.x}_{chunkCoord.y}";
         spawnedChunks.Add(chunkCoord, chunk);
     }
 
