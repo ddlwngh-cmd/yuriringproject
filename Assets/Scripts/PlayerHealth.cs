@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -25,6 +26,7 @@ public class PlayerHealth : MonoBehaviour
     public float MaxHP => playerStatus != null ? playerStatus.CurrentMaxHP : 0f;
     public float CurrentHP => playerStatus != null ? playerStatus.CurrentHP : 0f;
     public bool IsInvincible => isInvincible;
+    public event Action Died;
 
     private void Awake()
     {
@@ -185,6 +187,7 @@ public class PlayerHealth : MonoBehaviour
         isDead = true;
         isInvincible = false;
         SetSpritesVisible(true);
+        Died?.Invoke();
         onDeath?.Invoke();
     }
 }
