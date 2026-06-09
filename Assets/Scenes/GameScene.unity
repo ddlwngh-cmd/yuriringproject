@@ -1254,7 +1254,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &499536872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3388,6 +3388,11 @@ MonoBehaviour:
   stageCsvResourcePath: Stage
   playerHealth: {fileID: 358002076}
   timeText: {fileID: 1435938773}
+  resultHud: {fileID: 499536871}
+  successImage: {fileID: 1532043999}
+  failImage: {fileID: 1948720855}
+  homeButton: {fileID: 1545536941}
+  homeSceneName: HomeScene
   onStageSuccess:
     m_PersistentCalls:
       m_Calls: []

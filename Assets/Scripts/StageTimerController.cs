@@ -4,6 +4,8 @@ using System.Globalization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class StageTimerController : MonoBehaviour
 {
@@ -28,6 +30,13 @@ public class StageTimerController : MonoBehaviour
     [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private TMP_Text timeText;
 
+    [Header("Result UI")]
+    [SerializeField] private GameObject resultHud;
+    [SerializeField] private GameObject successImage;
+    [SerializeField] private GameObject failImage;
+    [SerializeField] private Button homeButton;
+    [SerializeField] private string homeSceneName = "HomeScene";
+
     [Header("Events")]
     [SerializeField] private UnityEvent onStageSuccess;
     [SerializeField] private UnityEvent onStageFailure;
@@ -35,13 +44,17 @@ public class StageTimerController : MonoBehaviour
     private float remainingTime;
     private bool isInitialized;
     private StageResult result = StageResult.InProgress;
+    private bool isResultPauseApplied;
 
     public float RemainingTime => remainingTime;
     public StageResult Result => result;
 
     private void Awake()
     {
+        GamePauseState.SetForcedPause(false);
+        Time.timeScale = 1f;
         ResolveReferences();
+        HideResultHud();
     }
 
     private void OnEnable()
@@ -49,6 +62,11 @@ public class StageTimerController : MonoBehaviour
         if (playerHealth != null)
         {
             playerHealth.Died += OnPlayerDied;
+        }
+
+        if (homeButton != null)
+        {
+            homeButton.onClick.AddListener(LoadHomeScene);
         }
     }
 
@@ -80,16 +98,18 @@ public class StageTimerController : MonoBehaviour
             return;
         }
 
-        if (result == StageResult.InProgress && !GamePauseState.IsGameplayPaused)
+        if (result != StageResult.InProgress || GamePauseState.IsGameplayPaused)
         {
-            remainingTime = Mathf.Max(0f, remainingTime - Time.deltaTime);
-            if (remainingTime <= 0f)
-            {
-                TriggerSuccess();
-            }
+            return;
         }
 
+        remainingTime = Mathf.Max(0f, remainingTime - Time.deltaTime);
         UpdateTimerText();
+
+        if (remainingTime <= 0f)
+        {
+            TriggerSuccess();
+        }
     }
 
     private void OnDisable()
@@ -97,6 +117,11 @@ public class StageTimerController : MonoBehaviour
         if (playerHealth != null)
         {
             playerHealth.Died -= OnPlayerDied;
+        }
+
+        if (homeButton != null)
+        {
+            homeButton.onClick.RemoveListener(LoadHomeScene);
         }
     }
 
@@ -209,6 +234,7 @@ public class StageTimerController : MonoBehaviour
         remainingTime = 0f;
         result = StageResult.Success;
         UpdateTimerText();
+        CompleteStage(true);
         onStageSuccess?.Invoke();
     }
 
@@ -220,7 +246,67 @@ public class StageTimerController : MonoBehaviour
         }
 
         result = StageResult.Failure;
+        CompleteStage(false);
         onStageFailure?.Invoke();
+    }
+
+    private void CompleteStage(bool isSuccess)
+    {
+        GamePauseState.SetForcedPause(true);
+        Time.timeScale = 0f;
+        isResultPauseApplied = true;
+
+        if (successImage != null)
+        {
+            successImage.SetActive(isSuccess);
+        }
+
+        if (failImage != null)
+        {
+            failImage.SetActive(!isSuccess);
+        }
+
+        if (homeButton != null)
+        {
+            homeButton.gameObject.SetActive(true);
+            homeButton.interactable = true;
+        }
+
+        if (resultHud != null)
+        {
+            resultHud.SetActive(true);
+        }
+    }
+
+    private void HideResultHud()
+    {
+        if (resultHud != null)
+        {
+            resultHud.SetActive(false);
+        }
+    }
+
+    private void LoadHomeScene()
+    {
+        ReleaseResultPause();
+        SceneManager.LoadScene(homeSceneName);
+    }
+
+    private void OnDestroy()
+    {
+        ReleaseResultPause();
+    }
+
+    private void ReleaseResultPause()
+    {
+        if (!isResultPauseApplied)
+        {
+            return;
+        }
+
+        isResultPauseApplied = false;
+        GamePauseState.SetForcedPause(false);
+        Time.timeScale = 1f;
     }
 
     private void UpdateTimerText()
