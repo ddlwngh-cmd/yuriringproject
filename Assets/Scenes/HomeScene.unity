@@ -365,7 +365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &375332504
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1968,6 +1968,7 @@ GameObject:
   - component: {fileID: 1894663492}
   - component: {fileID: 1894663491}
   - component: {fileID: 1894663490}
+  - component: {fileID: 1894663488}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1975,6 +1976,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1894663488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1894663489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f3d15a03f254c30acf74e6d7f2f6451, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::HomeStageSelectionController
+  gameStartPanel: {fileID: 375332503}
+  startButton: {fileID: 1564247655}
+  closeButton: {fileID: 2124119941}
+  content: {fileID: 611581395}
+  stageButtonPrefab: {fileID: 6181297612364965409, guid: f5bee0c6d50fb00419230e4bda835a7b, type: 3}
+  stageCsvResourcePath: Stage
+  stageSpriteResourceFolder: Sprites
+  stageButtonSpacing: 20
+  gameSceneName: GameScene
 --- !u!114 &1894663490
 MonoBehaviour:
   m_ObjectHideFlags: 0
