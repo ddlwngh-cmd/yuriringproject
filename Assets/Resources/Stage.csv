@@ -1,2 +1,3 @@
-StageId,Tilemap,Time
-1,Tilemap1,20
+StageId,Tilemap,Time,Image,Name
+1,Tilemap1,20,Stage1,초원
+2,Tilemap2,30,Stage2,마법의 숲
