@@ -67,7 +67,7 @@ public class PlayerExperiences : MonoBehaviour
 
     public void AddExp(float amount)
     {
-        if (amount <= 0f)
+        if (GamePauseState.IsGameplayPaused || amount <= 0f)
         {
             return;
         }
@@ -119,6 +119,12 @@ public class PlayerExperiences : MonoBehaviour
             if (levelUpFullGaugeHoldSeconds > 0f)
             {
                 yield return new WaitForSecondsRealtime(levelUpFullGaugeHoldSeconds);
+            }
+
+            if (GamePauseState.IsForcedPause)
+            {
+                queuedExp = 0f;
+                yield break;
             }
 
             currentLevel++;
