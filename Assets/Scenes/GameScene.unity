@@ -3106,7 +3106,6 @@ GameObject:
   - component: {fileID: 1705828735}
   - component: {fileID: 1705828737}
   - component: {fileID: 1705828736}
-  - component: {fileID: 1705828738}
   m_Layer: 5
   m_Name: TXT_Coin
   m_TagString: Untagged
@@ -3233,20 +3232,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1705828734}
   m_CullTransparentMesh: 1
---- !u!114 &1705828738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1705828734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7203e9760a1d41c7bb0e753bb292b35f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentCoin: 0
-  coinText: {fileID: 1705828736}
 --- !u!1 &1916912682
 GameObject:
   m_ObjectHideFlags: 0
