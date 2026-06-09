@@ -85,13 +85,17 @@ public class ExplosionController : MonoBehaviour
             return;
         }
 
-        MonsterController monster = eventArgs.Target as MonsterController;
-        if (monster == null || !monster.IsDead)
+        IEnemyDamageable enemy = eventArgs.Target as IEnemyDamageable;
+        if (enemy == null || !enemy.IsDead)
         {
             return;
         }
 
-        TryExplode(monster.transform.position);
+        Component enemyComponent = enemy as Component;
+        if (enemyComponent != null)
+        {
+            TryExplode(enemyComponent.transform.position);
+        }
     }
 
     private void TryExplode(Vector3 position)

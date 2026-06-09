@@ -2861,10 +2861,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1aaf3ec05cdb29549ba5505b718d2363, type: 3}
+--- !u!1 &2059214301
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2059214303}
+  - component: {fileID: 2059214302}
+  m_Layer: 0
+  m_Name: TreasureBoxSpawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2059214302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059214301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5df5af3d1124163bdafc60653f524bf, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::TreasureBoxSpawnManager
+  treasureBoxPrefab: {fileID: 7746219046391043821, guid: e0ece06341c0cd940bef17858bd3ca1b, type: 3}
+  spawnCooldown: 30
+  initialDelay: 10
+  maxActiveBoxes: 3
+  playerTarget: {fileID: 358002071}
+  targetCamera: {fileID: 428260928}
+  outsideViewPadding: 2
+  randomDistanceRange: 5
+--- !u!4 &2059214303
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059214301}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 2059214303}
   - {fileID: 428260929}
   - {fileID: 358002071}
   - {fileID: 2047626022}

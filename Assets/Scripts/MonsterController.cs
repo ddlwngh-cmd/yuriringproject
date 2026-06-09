@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class MonsterController : MonoBehaviour, IDamageable
+public class MonsterController : MonoBehaviour, IEnemyDamageable
 {
     [Serializable]
     public struct ExpOrbDropEntry
