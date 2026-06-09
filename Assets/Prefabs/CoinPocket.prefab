@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8457749850070031938}
   - component: {fileID: 5909109166459576544}
   m_Layer: 0
-  m_Name: CoinPokect
+  m_Name: CoinPocket
   m_TagString: MagnetCollectible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
