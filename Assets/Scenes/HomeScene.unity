@@ -3543,6 +3543,7 @@ MonoBehaviour:
   upgradeCellPrefab: {fileID: 1262931565}
   upgradeCsvResourcePath: UpgradeStatus
   upgradeCellSpacing: 10
+  exitButton: {fileID: 513506239}
   gameSceneName: GameScene
 --- !u!1 &1894663489
 GameObject:
