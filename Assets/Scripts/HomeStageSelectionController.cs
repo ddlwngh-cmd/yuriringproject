@@ -30,6 +30,9 @@ public class HomeStageSelectionController : MonoBehaviour
     [SerializeField] private string upgradeCsvResourcePath = "UpgradeStatus";
     [SerializeField, Min(0f)] private float upgradeCellSpacing = 10f;
 
+    [Header("Application")]
+    [SerializeField] private Button exitButton;
+
     [Header("Scene")]
     [SerializeField] private string gameSceneName = "GameScene";
 
@@ -79,6 +82,11 @@ public class HomeStageSelectionController : MonoBehaviour
             upgradeCloseButton.onClick.AddListener(CloseUpgradePanel);
         }
 
+        if (exitButton != null)
+        {
+            exitButton.onClick.AddListener(ExitApplication);
+        }
+
         UpgradeProgressStorage.ProgressChanged += RefreshUpgradeUI;
     }
 
@@ -102,6 +110,11 @@ public class HomeStageSelectionController : MonoBehaviour
         if (upgradeCloseButton != null)
         {
             upgradeCloseButton.onClick.RemoveListener(CloseUpgradePanel);
+        }
+
+        if (exitButton != null)
+        {
+            exitButton.onClick.RemoveListener(ExitApplication);
         }
 
         UpgradeProgressStorage.ProgressChanged -= RefreshUpgradeUI;
@@ -155,9 +168,9 @@ public class HomeStageSelectionController : MonoBehaviour
 
     private bool ValidateReferences()
     {
-        if (gameStartPanel == null || startButton == null || closeButton == null || content == null || stageButtonPrefab == null)
+        if (gameStartPanel == null || startButton == null || closeButton == null || exitButton == null || content == null || stageButtonPrefab == null)
         {
-            Debug.LogError("HomeStageSelectionController requires the panel, buttons, content, and BTN_Stage prefab references.");
+            Debug.LogError("HomeStageSelectionController requires the panel, buttons, BTN_Exit, content, and BTN_Stage prefab references.");
             return false;
         }
 
@@ -361,6 +374,15 @@ public class HomeStageSelectionController : MonoBehaviour
     private void CloseGameStartPanel()
     {
         gameStartPanel.SetActive(false);
+    }
+
+    private void ExitApplication()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     private void StartStage(StageData stage)
