@@ -1,0 +1,44 @@
+﻿StringKey,KOR,ENG
+level_up_card_001_desc,공격력이 150% 됩니다.,Attack power increases to 150%.
+level_up_card_002_desc,공격력이 200% 됩니다.,Attack power increases to 200%.
+level_up_card_003_desc,공격력이 250% 됩니다.,Attack power increases to 250%.
+level_up_card_004_desc,최대 체력이 150% 됩니다.,Max HP increases to 150%.
+level_up_card_005_desc,최대 체력이 200% 됩니다.,Max HP increases to 200%.
+level_up_card_006_desc,최대 체력이 250% 됩니다.,Max HP increases to 250%.
+level_up_card_007_desc,대미지의 20%만큼 체력이 회복합니다.,Restore HP equal to 20% of damage dealt.
+level_up_card_008_desc,대미지의 30%만큼 체력이 회복합니다.,Restore HP equal to 30% of damage dealt.
+level_up_card_009_desc,대미지의 40%만큼 체력이 회복합니다.,Restore HP equal to 40% of damage dealt.
+level_up_card_010_desc,아이템 흡수 범위가 150% 됩니다.,Item pickup range increases to 150%.
+level_up_card_011_desc,아이템 흡수 범위가 200% 됩니다.,Item pickup range increases to 200%.
+level_up_card_012_desc,아이템 흡수 범위가 250% 됩니다.,Item pickup range increases to 250%.
+level_up_card_013_desc,불덩이 실드가 하나 생성됩니다.,Create one fireball shield.
+level_up_card_014_desc,불덩이 실드가 두개 생성됩니다.,Create two fireball shields.
+level_up_card_015_desc,불덩이 실드가 세개 생성됩니다.,Create three fireball shields.
+level_up_card_016_desc,불덩이 실드가 네개 생성됩니다.,Create four fireball shields.
+level_up_card_017_desc,사망한 몬스터가 20% 확률로 폭발합니다.,Defeated monsters have a 20% chance to explode.
+level_up_card_018_desc,사망한 몬스터가 30% 확률로 폭발합니다.,Defeated monsters have a 30% chance to explode.
+level_up_card_019_desc,사망한 몬스터가 40% 확률로 폭발합니다.,Defeated monsters have a 40% chance to explode.
+upgrade_stat_atk_name,공격력,Attack Power
+upgrade_stat_hp_name,체력,HP
+upgrade_stat_radius_name,자석 반경,Magnet Radius
+upgrade_stat_move_speed_name,이동 속도,Move Speed
+upgrade_stat_atk_speed_name,공격 속도,Attack Speed
+upgrade_stat_cri_name,치명타 확률,Critical Chance
+upgrade_stat_revival_name,부활 횟수,Revives
+stage_001_name,초원,Grassland
+stage_002_name,마법의 숲,Enchanted Forest
+ui_home_exit,나가기,Exit
+ui_home_game_start,게임 시작,Game Start
+ui_home_upgrade,업그레이드,Upgrade
+ui_home_stage,스테이지,Stage
+ui_common_close,X,X
+ui_game_home,홈,HOME
+ui_game_level,레벨 : {0},Level: {0}
+ui_game_coin,코인 : {0},Coin: {0}
+ui_game_timer,{0:00}:{1:00},{0:00}:{1:00}
+ui_level_up_description_placeholder,"스킬 설명
+들어갈 영역","Skill description
+area"
+ui_upgrade_price,{0},{0}
+ui_upgrade_max,최대,MAX
+ui_number_value,{0},{0}

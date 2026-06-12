@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 1304797452680072333}
   - component: {fileID: 7459273801053976768}
   - component: {fileID: 321121968514309725}
+  - component: {fileID: 700000000000000001}
   m_Layer: 5
   m_Name: TXT_Status
   m_TagString: Untagged
@@ -140,7 +141,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uACF5\uACA9\uB825"
+  m_text: "\uacf5\uaca9\ub825"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ef7548e36d0e8d548b402352d1bd50ae, type: 2}
   m_sharedMaterial: {fileID: 9133837734225694870, guid: ef7548e36d0e8d548b402352d1bd50ae, type: 2}
@@ -789,6 +790,7 @@ GameObject:
   - component: {fileID: 4348746994956447675}
   - component: {fileID: 6371467899397850855}
   - component: {fileID: 8903720375717050047}
+  - component: {fileID: 700000000000000002}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -843,7 +845,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1000
+  m_text: "{0}"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ef7548e36d0e8d548b402352d1bd50ae, type: 2}
   m_sharedMaterial: {fileID: 9133837734225694870, guid: ef7548e36d0e8d548b402352d1bd50ae, type: 2}
@@ -915,3 +917,29 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &700000000000000001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3426888503244071988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e768a8947e4eb496a648d9581818ab, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Localization
+  stringKey: upgrade_stat_atk_name
+--- !u!114 &700000000000000002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7478913266746220863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e768a8947e4eb496a648d9581818ab, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Localization
+  stringKey: ui_upgrade_price

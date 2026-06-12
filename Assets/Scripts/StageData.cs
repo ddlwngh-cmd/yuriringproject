@@ -10,7 +10,7 @@ public sealed class StageData
     public string Tilemap;
     public float Time;
     public string Image;
-    public string Name;
+    public string StringKey;
 }
 
 public static class StageDataRepository
@@ -41,16 +41,16 @@ public static class StageDataRepository
         int tilemapIndex = FindColumnIndex(headers, "Tilemap");
         int timeIndex = FindColumnIndex(headers, "Time");
         int imageIndex = FindColumnIndex(headers, "Image");
-        int nameIndex = FindColumnIndex(headers, "Name");
+        int stringKeyIndex = FindColumnIndex(headers, "StringKey");
 
-        if (stageIdIndex < 0 || tilemapIndex < 0 || timeIndex < 0 || imageIndex < 0 || nameIndex < 0)
+        if (stageIdIndex < 0 || tilemapIndex < 0 || timeIndex < 0 || imageIndex < 0 || stringKeyIndex < 0)
         {
-            Debug.LogError("Stage.csv must contain StageId, Tilemap, Time, Image, and Name columns.");
+            Debug.LogError("Stage.csv must contain StageId, Tilemap, Time, Image, and StringKey columns.");
             return stages;
         }
 
         int requiredColumnCount = Mathf.Max(stageIdIndex,
-            Mathf.Max(tilemapIndex, Mathf.Max(timeIndex, Mathf.Max(imageIndex, nameIndex)))) + 1;
+            Mathf.Max(tilemapIndex, Mathf.Max(timeIndex, Mathf.Max(imageIndex, stringKeyIndex)))) + 1;
 
         for (int i = 1; i < lines.Length; i++)
         {
@@ -69,7 +69,7 @@ public static class StageDataRepository
                 Tilemap = columns[tilemapIndex].Trim(),
                 Time = Mathf.Max(0f, time),
                 Image = columns[imageIndex].Trim(),
-                Name = columns[nameIndex].Trim()
+                StringKey = columns[stringKeyIndex].Trim()
             });
         }
 
