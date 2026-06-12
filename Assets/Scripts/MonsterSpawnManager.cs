@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 
 public class MonsterSpawnManager : MonoBehaviour
@@ -16,6 +17,7 @@ public class MonsterSpawnManager : MonoBehaviour
         public int WaveSizeMax;
         public int TotalBudget;
         public int MaxAliveCap;
+        public float SpawnEndSec;
     }
 
     private class SpawnRuleState
@@ -93,7 +95,7 @@ public class MonsterSpawnManager : MonoBehaviour
 
         foreach (SpawnRuleState state in spawnStates)
         {
-            if (elapsed < state.NextSpawnTime)
+            if (elapsed < state.NextSpawnTime || elapsed >= state.Rule.SpawnEndSec)
             {
                 continue;
             }
@@ -218,21 +220,33 @@ public class MonsterSpawnManager : MonoBehaviour
                 continue;
             }
 
+            float spawnEndSec = float.PositiveInfinity;
+            if (c.Length >= 10 && !string.IsNullOrWhiteSpace(c[9]))
+            {
+                spawnEndSec = ParseFloat(c[9]);
+            }
+
             StageMonsterRow row = new()
             {
-                StageId = int.Parse(c[0]),
+                StageId = int.Parse(c[0], NumberStyles.Integer, CultureInfo.InvariantCulture),
                 MonsterId = c[1],
-                SpawnStartSec = float.Parse(c[2]),
-                WaveIntervalSec = Mathf.Max(0.01f, float.Parse(c[3])),
-                WaveSizeStart = Mathf.Max(0, int.Parse(c[4])),
-                WaveSizeGrowth = Mathf.Max(0, int.Parse(c[5])),
-                WaveSizeMax = Mathf.Max(0, int.Parse(c[6])),
-                TotalBudget = Mathf.Max(0, int.Parse(c[7])),
-                MaxAliveCap = Mathf.Max(0, int.Parse(c[8]))
+                SpawnStartSec = ParseFloat(c[2]),
+                WaveIntervalSec = Mathf.Max(0.01f, ParseFloat(c[3])),
+                WaveSizeStart = Mathf.Max(0, int.Parse(c[4], NumberStyles.Integer, CultureInfo.InvariantCulture)),
+                WaveSizeGrowth = Mathf.Max(0, int.Parse(c[5], NumberStyles.Integer, CultureInfo.InvariantCulture)),
+                WaveSizeMax = Mathf.Max(0, int.Parse(c[6], NumberStyles.Integer, CultureInfo.InvariantCulture)),
+                TotalBudget = Mathf.Max(0, int.Parse(c[7], NumberStyles.Integer, CultureInfo.InvariantCulture)),
+                MaxAliveCap = Mathf.Max(0, int.Parse(c[8], NumberStyles.Integer, CultureInfo.InvariantCulture)),
+                SpawnEndSec = spawnEndSec
             };
             rows.Add(row);
         }
 
         return rows;
+    }
+
+    private static float ParseFloat(string value)
+    {
+        return float.Parse(value, NumberStyles.Float, CultureInfo.InvariantCulture);
     }
 }
