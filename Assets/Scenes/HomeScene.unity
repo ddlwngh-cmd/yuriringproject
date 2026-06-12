@@ -2342,6 +2342,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1241542477}
   m_CullTransparentMesh: 1
+--- !u!1 &1262931565 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4024474818387966445, guid: d782e710485f72743ac89b3cecc4f528, type: 3}
+  m_PrefabInstance: {fileID: 1838897263375269499}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1318899658
 GameObject:
   m_ObjectHideFlags: 0
@@ -3531,6 +3536,13 @@ MonoBehaviour:
   stageSpriteResourceFolder: Sprites
   stageButtonSpacing: 20
   coinAmountText: {fileID: 1764200690}
+  upgradePanel: {fileID: 1215081519}
+  upgradeButton: {fileID: 526414054}
+  upgradeCloseButton: {fileID: 614552028}
+  upgradeContent: {fileID: 1109651679}
+  upgradeCellPrefab: {fileID: 1262931565}
+  upgradeCsvResourcePath: UpgradeStatus
+  upgradeCellSpacing: 10
   gameSceneName: GameScene
 --- !u!1 &1894663489
 GameObject:
@@ -4321,13 +4333,28 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4024474818387966445, guid: d782e710485f72743ac89b3cecc4f528, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1838897263375269503}
   m_SourcePrefab: {fileID: 100100000, guid: d782e710485f72743ac89b3cecc4f528, type: 3}
 --- !u!224 &1838897263375269500 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7217712846595822863, guid: d782e710485f72743ac89b3cecc4f528, type: 3}
   m_PrefabInstance: {fileID: 1838897263375269499}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1838897263375269503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262931565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a252a3a73acd421a9634e93203034c1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeCellView
 --- !u!1001 &5642517203242278035
 PrefabInstance:
   m_ObjectHideFlags: 0
