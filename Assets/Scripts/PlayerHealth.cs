@@ -22,6 +22,7 @@ public class PlayerHealth : MonoBehaviour
     private bool isInvincible;
     private Coroutine invincibleRoutine;
     private SpriteRenderer[] spriteRenderers;
+    private int remainingRevivals;
 
     public float MaxHP => playerStatus != null ? playerStatus.CurrentMaxHP : 0f;
     public float CurrentHP => playerStatus != null ? playerStatus.CurrentHP : 0f;
@@ -31,8 +32,13 @@ public class PlayerHealth : MonoBehaviour
     private void Awake()
     {
         ResolvePlayerStatus();
-        playerStatus?.InitializeHealthForBattle();
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
+    }
+
+    private void Start()
+    {
+        playerStatus?.InitializeHealthForBattle();
+        remainingRevivals = playerStatus != null ? playerStatus.RevivalCount : 0;
         UpdateHPUI();
     }
 
@@ -63,6 +69,11 @@ public class PlayerHealth : MonoBehaviour
 
         if (playerStatus.CurrentHP <= 0f)
         {
+            if (TryRevive())
+            {
+                return true;
+            }
+
             Die();
             return true;
         }
@@ -175,6 +186,27 @@ public class PlayerHealth : MonoBehaviour
         {
             spriteRenderers[i].enabled = visible;
         }
+    }
+
+    private bool TryRevive()
+    {
+        if (remainingRevivals <= 0 || playerStatus == null)
+        {
+            return false;
+        }
+
+        remainingRevivals--;
+        playerStatus.RestoreFullHealth();
+        UpdateHPUI();
+
+        if (invincibleRoutine != null)
+        {
+            StopCoroutine(invincibleRoutine);
+        }
+
+        SetSpritesVisible(true);
+        invincibleRoutine = StartCoroutine(InvincibleCoroutine());
+        return true;
     }
 
     private void Die()

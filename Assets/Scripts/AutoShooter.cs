@@ -23,6 +23,12 @@ public class AutoShooter : MonoBehaviour
 
     private void Awake()
     {
+        UpgradeStatusData upgrade = UpgradeStatusRepository.GetCurrent(UpgradeStat.ATKSpeed);
+        if (upgrade != null)
+        {
+            fireInterval = Mathf.Max(MinFireInterval, upgrade.StatValue);
+        }
+
         if (spawnPoint == null)
         {
             spawnPoint = transform;

@@ -26,5 +26,12 @@ public class HomeStageSelectionControllerEditor : Editor
                 controller.AddCheatCoin();
             }
         }
+
+        EditorGUILayout.Space();
+        EditorGUILayout.LabelField("강화 치트", EditorStyles.boldLabel);
+        if (GUILayout.Button("모든 강화 레벨 0으로 초기화"))
+        {
+            controller.ResetAllUpgradeLevels();
+        }
     }
 }

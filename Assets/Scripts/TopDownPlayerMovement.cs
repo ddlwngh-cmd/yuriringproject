@@ -10,6 +10,12 @@ public class TopDownPlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        UpgradeStatusData upgrade = UpgradeStatusRepository.GetCurrent(UpgradeStat.MoveSpeed);
+        if (upgrade != null)
+        {
+            moveSpeed = Mathf.Max(0f, upgrade.StatValue);
+        }
+
         animator = GetComponent<Animator>();
         animator.SetFloat("moveX", lastFacing.x);
         animator.SetFloat("moveY", lastFacing.y);
