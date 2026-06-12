@@ -21,12 +21,24 @@ public class HomeStageSelectionController : MonoBehaviour
     [Header("Coin")]
     [SerializeField] private TMP_Text coinAmountText;
 
+    [Header("Upgrade")]
+    [SerializeField] private GameObject upgradePanel;
+    [SerializeField] private Button upgradeButton;
+    [SerializeField] private Button upgradeCloseButton;
+    [SerializeField] private RectTransform upgradeContent;
+    [SerializeField] private GameObject upgradeCellPrefab;
+    [SerializeField] private string upgradeCsvResourcePath = "UpgradeStatus";
+    [SerializeField, Min(0f)] private float upgradeCellSpacing = 10f;
+
     [Header("Scene")]
     [SerializeField] private string gameSceneName = "GameScene";
+
+    private readonly List<UpgradeCellView> upgradeCells = new List<UpgradeCellView>();
 
     private void Awake()
     {
         ResolveCoinAmountText();
+        ResolveUpgradeReferences();
         RefreshTotalCoin();
 
         if (!ValidateReferences())
@@ -36,7 +48,13 @@ public class HomeStageSelectionController : MonoBehaviour
         }
 
         BuildStageButtons();
+        BuildUpgradeCells();
         gameStartPanel.SetActive(false);
+
+        if (upgradePanel != null)
+        {
+            upgradePanel.SetActive(false);
+        }
     }
 
     private void OnEnable()
@@ -50,6 +68,18 @@ public class HomeStageSelectionController : MonoBehaviour
         {
             closeButton.onClick.AddListener(CloseGameStartPanel);
         }
+
+        if (upgradeButton != null)
+        {
+            upgradeButton.onClick.AddListener(OpenUpgradePanel);
+        }
+
+        if (upgradeCloseButton != null)
+        {
+            upgradeCloseButton.onClick.AddListener(CloseUpgradePanel);
+        }
+
+        UpgradeProgressStorage.ProgressChanged += RefreshUpgradeUI;
     }
 
     private void OnDisable()
@@ -63,6 +93,18 @@ public class HomeStageSelectionController : MonoBehaviour
         {
             closeButton.onClick.RemoveListener(CloseGameStartPanel);
         }
+
+        if (upgradeButton != null)
+        {
+            upgradeButton.onClick.RemoveListener(OpenUpgradePanel);
+        }
+
+        if (upgradeCloseButton != null)
+        {
+            upgradeCloseButton.onClick.RemoveListener(CloseUpgradePanel);
+        }
+
+        UpgradeProgressStorage.ProgressChanged -= RefreshUpgradeUI;
     }
 
     public void ResetTotalCoin()
@@ -79,10 +121,22 @@ public class HomeStageSelectionController : MonoBehaviour
 
     public void RefreshTotalCoin()
     {
+        int totalCoin = CoinStorage.LoadTotalCoin();
         if (coinAmountText != null)
         {
-            coinAmountText.SetText("{0}", CoinStorage.LoadTotalCoin());
+            coinAmountText.SetText("{0}", totalCoin);
         }
+
+        for (int i = 0; i < upgradeCells.Count; i++)
+        {
+            upgradeCells[i].Refresh(totalCoin);
+        }
+    }
+
+    public void ResetAllUpgradeLevels()
+    {
+        UpgradeProgressStorage.ResetAllLevels();
+        RefreshUpgradeUI();
     }
 
     private void ResolveCoinAmountText()
@@ -186,6 +240,117 @@ public class HomeStageSelectionController : MonoBehaviour
         buttonRect.anchorMax = new Vector2(0.5f, 1f);
         buttonRect.pivot = new Vector2(0.5f, 1f);
         buttonRect.anchoredPosition = new Vector2(0f, -index * (buttonHeight + stageButtonSpacing));
+    }
+
+
+    private void ResolveUpgradeReferences()
+    {
+        Transform root = transform;
+        upgradePanel ??= root.Find("Panel_Upgrade")?.gameObject;
+        upgradeButton ??= root.Find("BTNS/BTN_Upgrade")?.GetComponent<Button>();
+        upgradeCloseButton ??= root.Find("Panel_Upgrade/Popup/BTN_X")?.GetComponent<Button>();
+        upgradeContent ??= root.Find("Panel_Upgrade/Popup/Scroll View/Viewport/Content") as RectTransform;
+
+        if (upgradeCellPrefab == null && upgradeContent != null && upgradeContent.childCount > 0)
+        {
+            upgradeCellPrefab = upgradeContent.GetChild(0).gameObject;
+        }
+    }
+
+    private void BuildUpgradeCells()
+    {
+        if (upgradeContent == null || upgradeCellPrefab == null)
+        {
+            Debug.LogError("Upgrade UI requires Panel_Upgrade content and an UpgradeCell template.", this);
+            return;
+        }
+
+        IReadOnlyDictionary<UpgradeStat, List<UpgradeStatusData>> table = UpgradeStatusRepository.Load(upgradeCsvResourcePath);
+        Sprite dotOff = null;
+        Sprite dotOn = null;
+        Sprite[] dotSprites = Resources.LoadAll<Sprite>("Sprites/dot");
+        for (int i = 0; i < dotSprites.Length; i++)
+        {
+            if (dotSprites[i].name == "dot_0") dotOff = dotSprites[i];
+            if (dotSprites[i].name == "dot_1") dotOn = dotSprites[i];
+        }
+
+        upgradeCellPrefab.SetActive(false);
+        upgradeCells.Clear();
+        float cellHeight = upgradeCellPrefab.GetComponent<RectTransform>()?.rect.height ?? 80f;
+        int cellIndex = 0;
+
+        foreach (UpgradeStat stat in System.Enum.GetValues(typeof(UpgradeStat)))
+        {
+            if (!table.TryGetValue(stat, out List<UpgradeStatusData> levels) || levels.Count == 0)
+            {
+                continue;
+            }
+
+            GameObject cellObject = Instantiate(upgradeCellPrefab, upgradeContent);
+            cellObject.name = $"UpgradeCell_{stat}";
+            cellObject.SetActive(true);
+            PositionUpgradeCell(cellObject.GetComponent<RectTransform>(), cellIndex, cellHeight);
+
+            UpgradeCellView cell = cellObject.AddComponent<UpgradeCellView>();
+            cell.Bind(stat, levels, dotOff, dotOn, TryPurchaseUpgrade);
+            upgradeCells.Add(cell);
+            cellIndex++;
+        }
+
+        float contentHeight = cellIndex > 0
+            ? cellIndex * cellHeight + (cellIndex - 1) * upgradeCellSpacing
+            : 0f;
+        upgradeContent.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, contentHeight);
+    }
+
+    private void PositionUpgradeCell(RectTransform cellRect, int index, float cellHeight)
+    {
+        if (cellRect == null)
+        {
+            return;
+        }
+
+        cellRect.anchorMin = new Vector2(0f, 1f);
+        cellRect.anchorMax = new Vector2(0f, 1f);
+        cellRect.pivot = new Vector2(0f, 1f);
+        cellRect.anchoredPosition = new Vector2(0f, -index * (cellHeight + upgradeCellSpacing));
+    }
+
+    private void TryPurchaseUpgrade(UpgradeStat stat)
+    {
+        IReadOnlyDictionary<UpgradeStat, List<UpgradeStatusData>> table = UpgradeStatusRepository.Load(upgradeCsvResourcePath);
+        if (!table.TryGetValue(stat, out List<UpgradeStatusData> levels))
+        {
+            return;
+        }
+
+        int nextLevel = UpgradeProgressStorage.LoadLevel(stat) + 1;
+        UpgradeStatusData next = levels.Find(data => data.Level == nextLevel);
+        if (next == null || !CoinStorage.TrySpendCoin(next.CoinValue))
+        {
+            RefreshUpgradeUI();
+            return;
+        }
+
+        UpgradeProgressStorage.SaveLevel(stat, nextLevel);
+        RefreshUpgradeUI();
+    }
+
+    private void RefreshUpgradeUI()
+    {
+        RefreshTotalCoin();
+    }
+
+    private void OpenUpgradePanel()
+    {
+        RefreshUpgradeUI();
+        upgradePanel?.SetActive(true);
+    }
+
+    private void CloseUpgradePanel()
+    {
+        upgradePanel?.SetActive(false);
     }
 
     private void OpenGameStartPanel()

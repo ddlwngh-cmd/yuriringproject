@@ -23,6 +23,23 @@ public static class CoinStorage
         return newTotal;
     }
 
+    public static bool TrySpendCoin(int amount)
+    {
+        if (amount < 0)
+        {
+            return false;
+        }
+
+        int currentTotal = LoadTotalCoin();
+        if (currentTotal < amount)
+        {
+            return false;
+        }
+
+        SaveTotalCoin(currentTotal - amount);
+        return true;
+    }
+
     public static void ResetCoin()
     {
         SaveTotalCoin(0);
