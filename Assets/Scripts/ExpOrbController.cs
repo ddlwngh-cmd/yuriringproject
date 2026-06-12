@@ -8,6 +8,8 @@ public class ExpOrbController : MagnetCollectible
 
     protected override void OnCollected(GameObject player)
     {
+        XPOrbAudioPlayer.Play();
+
         ExpDropManager manager = ExpDropManager.Instance;
         if (manager != null)
         {
