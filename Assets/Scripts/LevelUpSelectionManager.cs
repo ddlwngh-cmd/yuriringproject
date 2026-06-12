@@ -36,7 +36,7 @@ public class LevelUpSelectionManager : MonoBehaviour
         public float Ratio;
         public int? Required;
         public string Icon;
-        public string Desc;
+        public string StringKey;
         public LevelUpCardEffect Effect;
         public float? Value;
     }
@@ -487,7 +487,15 @@ public class LevelUpSelectionManager : MonoBehaviour
 
             if (view.DescriptionText != null)
             {
-                view.DescriptionText.text = card.Desc;
+                Localization localization = view.DescriptionText.GetComponent<Localization>();
+                if (localization != null)
+                {
+                    localization.SetKey(card.StringKey);
+                }
+                else
+                {
+                    view.DescriptionText.text = LocalizationManager.Get(card.StringKey);
+                }
             }
         }
     }
@@ -696,7 +704,7 @@ public class LevelUpSelectionManager : MonoBehaviour
                 Ratio = ratio,
                 Required = required,
                 Icon = columns[3].Trim(),
-                Desc = columns[4],
+                StringKey = columns[4].Trim(),
                 Effect = effect,
                 Value = value
             });

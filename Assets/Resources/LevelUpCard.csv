@@ -1,20 +1,20 @@
-﻿ID,Ratio,Required,Icon,Desc,Effect,Value
-1,1,,Skill_ATKUPgrade,공격력이 150% 됩니다.,ATKUP,150
-2,1,1,Skill_ATKUPgrade,공격력이 200% 됩니다.,ATKUP,200
-3,1,2,Skill_ATKUPgrade,공격력이 250% 됩니다.,ATKUP,250
-4,1,,Skill_HPUP,최대 체력이 150% 됩니다.,HPUP,150
-5,1,4,Skill_HPUP,최대 체력이 200% 됩니다.,HPUP,200
-6,1,5,Skill_HPUP,최대 체력이 250% 됩니다.,HPUP,250
-7,1,,Skill_HEAL,대미지의 20%만큼 체력이 회복합니다.,HEAL,20
-8,1,7,Skill_HEAL,대미지의 30%만큼 체력이 회복합니다.,HEAL,30
-9,1,8,Skill_HEAL,대미지의 40%만큼 체력이 회복합니다.,HEAL,40
-10,1,,Skill_MAGNET,아이템 흡수 범위가 150% 됩니다.,MAGNET,150
-11,1,10,Skill_MAGNET,아이템 흡수 범위가 200% 됩니다.,MAGNET,200
-12,1,11,Skill_MAGNET,아이템 흡수 범위가 250% 됩니다.,MAGNET,250
-13,1,,Skill_Firering,불덩이 실드가 하나 생성됩니다.,FIRERING,1
-14,1,13,Skill_Firering,불덩이 실드가 두개 생성됩니다.,FIRERING,2
-15,1,14,Skill_Firering,불덩이 실드가 세개 생성됩니다.,FIRERING,3
-16,1,15,Skill_Firering,불덩이 실드가 네개 생성됩니다.,FIRERING,4
-17,1,,Skill_Explosion,사망한 몬스터가 20% 확률로 폭발합니다.,EXPLOSION,30
-18,1,17,Skill_Explosion,사망한 몬스터가 30% 확률로 폭발합니다.,EXPLOSION,40
-19,1,18,Skill_Explosion,사망한 몬스터가 40% 확률로 폭발합니다.,EXPLOSION,50
+﻿ID,Ratio,Required,Icon,StringKey,Effect,Value
+1,1,,Skill_ATKUPgrade,level_up_card_001_desc,ATKUP,150
+2,1,1,Skill_ATKUPgrade,level_up_card_002_desc,ATKUP,200
+3,1,2,Skill_ATKUPgrade,level_up_card_003_desc,ATKUP,250
+4,1,,Skill_HPUP,level_up_card_004_desc,HPUP,150
+5,1,4,Skill_HPUP,level_up_card_005_desc,HPUP,200
+6,1,5,Skill_HPUP,level_up_card_006_desc,HPUP,250
+7,1,,Skill_HEAL,level_up_card_007_desc,HEAL,20
+8,1,7,Skill_HEAL,level_up_card_008_desc,HEAL,30
+9,1,8,Skill_HEAL,level_up_card_009_desc,HEAL,40
+10,1,,Skill_MAGNET,level_up_card_010_desc,MAGNET,150
+11,1,10,Skill_MAGNET,level_up_card_011_desc,MAGNET,200
+12,1,11,Skill_MAGNET,level_up_card_012_desc,MAGNET,250
+13,1,,Skill_Firering,level_up_card_013_desc,FIRERING,1
+14,1,13,Skill_Firering,level_up_card_014_desc,FIRERING,2
+15,1,14,Skill_Firering,level_up_card_015_desc,FIRERING,3
+16,1,15,Skill_Firering,level_up_card_016_desc,FIRERING,4
+17,1,,Skill_Explosion,level_up_card_017_desc,EXPLOSION,30
+18,1,17,Skill_Explosion,level_up_card_018_desc,EXPLOSION,40
+19,1,18,Skill_Explosion,level_up_card_019_desc,EXPLOSION,50

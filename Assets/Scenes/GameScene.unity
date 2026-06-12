@@ -252,6 +252,7 @@ GameObject:
   - component: {fileID: 157126722}
   - component: {fileID: 157126724}
   - component: {fileID: 157126723}
+  - component: {fileID: 700000000000000001}
   m_Layer: 5
   m_Name: Text_Description
   m_TagString: Untagged
@@ -298,7 +299,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC2A4\uD0AC \uC124\uBA85\n\uB4E4\uC5B4\uAC08 \uC601\uC5ED"
+  m_text: "\uc2a4\ud0ac \uc124\uba85\n\ub4e4\uc5b4\uac08 \uc601\uc5ed"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6763357dd2e72784a943c2b387c7083f, type: 2}
   m_sharedMaterial: {fileID: 2832728814104287232, guid: 6763357dd2e72784a943c2b387c7083f, type: 2}
@@ -913,6 +914,7 @@ GameObject:
   - component: {fileID: 360753819}
   - component: {fileID: 360753821}
   - component: {fileID: 360753820}
+  - component: {fileID: 700000000000000002}
   m_Layer: 5
   m_Name: TXT_Level
   m_TagString: Untagged
@@ -959,7 +961,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Level : N'
+  m_text: "\ub808\ubca8 : {0}"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ef7548e36d0e8d548b402352d1bd50ae, type: 2}
   m_sharedMaterial: {fileID: 9133837734225694870, guid: ef7548e36d0e8d548b402352d1bd50ae, type: 2}
@@ -1637,6 +1639,7 @@ GameObject:
   - component: {fileID: 904861346}
   - component: {fileID: 904861348}
   - component: {fileID: 904861347}
+  - component: {fileID: 700000000000000003}
   m_Layer: 5
   m_Name: Text_Description
   m_TagString: Untagged
@@ -1683,7 +1686,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC2A4\uD0AC \uC124\uBA85\n\uB4E4\uC5B4\uAC08 \uC601\uC5ED"
+  m_text: "\uc2a4\ud0ac \uc124\uba85\n\ub4e4\uc5b4\uac08 \uc601\uc5ed"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6763357dd2e72784a943c2b387c7083f, type: 2}
   m_sharedMaterial: {fileID: 2832728814104287232, guid: 6763357dd2e72784a943c2b387c7083f, type: 2}
@@ -2218,6 +2221,7 @@ GameObject:
   - component: {fileID: 1435938772}
   - component: {fileID: 1435938774}
   - component: {fileID: 1435938773}
+  - component: {fileID: 700000000000000004}
   m_Layer: 5
   m_Name: TXT_Time
   m_TagString: Untagged
@@ -2264,7 +2268,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'MM : SS'
+  m_text: "{0:00}:{1:00}"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ef7548e36d0e8d548b402352d1bd50ae, type: 2}
   m_sharedMaterial: {fileID: 9133837734225694870, guid: ef7548e36d0e8d548b402352d1bd50ae, type: 2}
@@ -2603,6 +2607,7 @@ GameObject:
   - component: {fileID: 1579904767}
   - component: {fileID: 1579904769}
   - component: {fileID: 1579904768}
+  - component: {fileID: 700000000000000005}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2649,7 +2654,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HOME
+  m_text: "\ud648"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ef7548e36d0e8d548b402352d1bd50ae, type: 2}
   m_sharedMaterial: {fileID: 9133837734225694870, guid: ef7548e36d0e8d548b402352d1bd50ae, type: 2}
@@ -2870,6 +2875,7 @@ GameObject:
   - component: {fileID: 1635351652}
   - component: {fileID: 1635351654}
   - component: {fileID: 1635351653}
+  - component: {fileID: 700000000000000006}
   m_Layer: 5
   m_Name: Text_Description
   m_TagString: Untagged
@@ -2916,7 +2922,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC2A4\uD0AC \uC124\uBA85\n\uB4E4\uC5B4\uAC08 \uC601\uC5ED"
+  m_text: "\uc2a4\ud0ac \uc124\uba85\n\ub4e4\uc5b4\uac08 \uc601\uc5ed"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6763357dd2e72784a943c2b387c7083f, type: 2}
   m_sharedMaterial: {fileID: 2832728814104287232, guid: 6763357dd2e72784a943c2b387c7083f, type: 2}
@@ -3106,6 +3112,7 @@ GameObject:
   - component: {fileID: 1705828735}
   - component: {fileID: 1705828737}
   - component: {fileID: 1705828736}
+  - component: {fileID: 700000000000000007}
   m_Layer: 5
   m_Name: TXT_Coin
   m_TagString: Untagged
@@ -3152,7 +3159,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Coin : 0'
+  m_text: "\ucf54\uc778 : {0}"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ef7548e36d0e8d548b402352d1bd50ae, type: 2}
   m_sharedMaterial: {fileID: 9133837734225694870, guid: ef7548e36d0e8d548b402352d1bd50ae, type: 2}
@@ -3784,3 +3791,94 @@ SceneRoots:
   - {fileID: 487223578}
   - {fileID: 1461085227}
   - {fileID: 499536875}
+--- !u!114 &700000000000000001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157126721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e768a8947e4eb496a648d9581818ab, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Localization
+  stringKey: ui_level_up_description_placeholder
+--- !u!114 &700000000000000002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360753818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e768a8947e4eb496a648d9581818ab, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Localization
+  stringKey: ui_game_level
+--- !u!114 &700000000000000003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 904861345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e768a8947e4eb496a648d9581818ab, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Localization
+  stringKey: ui_level_up_description_placeholder
+--- !u!114 &700000000000000004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435938771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e768a8947e4eb496a648d9581818ab, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Localization
+  stringKey: ui_game_timer
+--- !u!114 &700000000000000005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579904766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e768a8947e4eb496a648d9581818ab, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Localization
+  stringKey: ui_game_home
+--- !u!114 &700000000000000006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635351651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e768a8947e4eb496a648d9581818ab, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Localization
+  stringKey: ui_level_up_description_placeholder
+--- !u!114 &700000000000000007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705828734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e768a8947e4eb496a648d9581818ab, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Localization
+  stringKey: ui_game_coin

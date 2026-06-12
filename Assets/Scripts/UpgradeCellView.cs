@@ -66,7 +66,15 @@ public class UpgradeCellView : MonoBehaviour
 
         if (statusText != null)
         {
-            statusText.text = levels[0].StatName;
+            Localization localization = statusText.GetComponent<Localization>();
+            if (localization != null)
+            {
+                localization.SetKey(levels[0].StringKey);
+            }
+            else
+            {
+                statusText.text = LocalizationManager.Get(levels[0].StringKey);
+            }
         }
 
         for (int i = 0; i < dots.Length; i++)
@@ -80,7 +88,24 @@ public class UpgradeCellView : MonoBehaviour
         bool canUpgrade = nextLevel != null;
         if (priceText != null)
         {
-            priceText.text = canUpgrade ? nextLevel.CoinValue.ToString() : "MAX";
+            Localization localization = priceText.GetComponent<Localization>();
+            if (localization != null)
+            {
+                if (canUpgrade)
+                {
+                    localization.SetKeyAndArguments("ui_upgrade_price", nextLevel.CoinValue);
+                }
+                else
+                {
+                    localization.SetKey("ui_upgrade_max");
+                }
+            }
+            else
+            {
+                priceText.text = canUpgrade
+                    ? LocalizationManager.Get("ui_upgrade_price", nextLevel.CoinValue)
+                    : LocalizationManager.Get("ui_upgrade_max");
+            }
         }
 
         if (buyButton != null)

@@ -84,7 +84,15 @@ public class CoinManager : MonoBehaviour
     {
         if (coinText != null)
         {
-            coinText.text = $"Coin : {currentCoin}";
+            Localization localization = coinText.GetComponent<Localization>();
+            if (localization != null)
+            {
+                localization.SetKeyAndArguments("ui_game_coin", currentCoin);
+            }
+            else
+            {
+                coinText.text = LocalizationManager.Get("ui_game_coin", currentCoin);
+            }
         }
     }
 }

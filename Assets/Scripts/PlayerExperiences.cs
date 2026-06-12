@@ -246,7 +246,7 @@ public class PlayerExperiences : MonoBehaviour
             return;
         }
 
-        GameObject createdLevelText = new("TXT_Level", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
+        GameObject createdLevelText = new("TXT_Level", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI), typeof(Localization));
         createdLevelText.transform.SetParent(hudCanvas.transform, false);
 
         RectTransform rectTransform = createdLevelText.GetComponent<RectTransform>();
@@ -270,6 +270,14 @@ public class PlayerExperiences : MonoBehaviour
             return;
         }
 
-        levelText.text = $"Level : {currentLevel}";
+        Localization localization = levelText.GetComponent<Localization>();
+        if (localization != null)
+        {
+            localization.SetKeyAndArguments("ui_game_level", currentLevel);
+        }
+        else
+        {
+            levelText.text = LocalizationManager.Get("ui_game_level", currentLevel);
+        }
     }
 }

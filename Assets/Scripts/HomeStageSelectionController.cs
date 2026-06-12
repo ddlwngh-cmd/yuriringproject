@@ -137,7 +137,15 @@ public class HomeStageSelectionController : MonoBehaviour
         int totalCoin = CoinStorage.LoadTotalCoin();
         if (coinAmountText != null)
         {
-            coinAmountText.SetText("{0}", totalCoin);
+            Localization localization = coinAmountText.GetComponent<Localization>();
+            if (localization != null)
+            {
+                localization.SetKeyAndArguments("ui_number_value", totalCoin);
+            }
+            else
+            {
+                coinAmountText.SetText("{0}", totalCoin);
+            }
         }
 
         for (int i = 0; i < upgradeCells.Count; i++)
@@ -219,7 +227,15 @@ public class HomeStageSelectionController : MonoBehaviour
         TMP_Text stageNameText = buttonObject.transform.Find("Text (TMP)")?.GetComponent<TMP_Text>();
         if (stageNameText != null)
         {
-            stageNameText.text = stage.Name;
+            Localization localization = stageNameText.GetComponent<Localization>();
+            if (localization != null)
+            {
+                localization.SetKey(stage.StringKey);
+            }
+            else
+            {
+                stageNameText.text = LocalizationManager.Get(stage.StringKey);
+            }
         }
 
         Image stageImage = buttonObject.transform.Find("StageImage")?.GetComponent<Image>();

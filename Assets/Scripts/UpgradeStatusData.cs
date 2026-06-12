@@ -16,11 +16,11 @@ public enum UpgradeStat
 
 public sealed class UpgradeStatusData
 {
-    public UpgradeStatusData(int id, UpgradeStat stat, string statName, int level, float statValue, int coinValue)
+    public UpgradeStatusData(int id, UpgradeStat stat, string stringKey, int level, float statValue, int coinValue)
     {
         Id = id;
         Stat = stat;
-        StatName = statName;
+        StringKey = stringKey;
         Level = level;
         StatValue = statValue;
         CoinValue = coinValue;
@@ -28,7 +28,7 @@ public sealed class UpgradeStatusData
 
     public int Id { get; }
     public UpgradeStat Stat { get; }
-    public string StatName { get; }
+    public string StringKey { get; }
     public int Level { get; }
     public float StatValue { get; }
     public int CoinValue { get; }

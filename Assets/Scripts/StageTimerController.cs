@@ -269,6 +269,14 @@ public class StageTimerController : MonoBehaviour
         int totalSeconds = Mathf.Max(0, Mathf.CeilToInt(remainingTime));
         int minutes = totalSeconds / 60;
         int seconds = totalSeconds % 60;
-        timeText.SetText("{0:00}:{1:00}", minutes, seconds);
+        Localization localization = timeText.GetComponent<Localization>();
+        if (localization != null)
+        {
+            localization.SetKeyAndArguments("ui_game_timer", minutes, seconds);
+        }
+        else
+        {
+            timeText.text = LocalizationManager.Get("ui_game_timer", minutes, seconds);
+        }
     }
 }
