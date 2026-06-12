@@ -9,6 +9,8 @@ public class CoinManager : MonoBehaviour
     [SerializeField, Min(0)] private int currentCoin;
     [SerializeField] private TMP_Text coinText;
 
+    private bool hasSavedSessionCoin;
+
     public event Action<int> CoinChanged;
 
     public int CurrentCoin => currentCoin;
@@ -50,6 +52,17 @@ public class CoinManager : MonoBehaviour
         currentCoin = (int)Math.Min((long)currentCoin + amount, int.MaxValue);
         UpdateCoinText();
         CoinChanged?.Invoke(currentCoin);
+    }
+
+    public int SaveSessionCoin()
+    {
+        if (hasSavedSessionCoin)
+        {
+            return CoinStorage.LoadTotalCoin();
+        }
+
+        hasSavedSessionCoin = true;
+        return CoinStorage.AddCoin(currentCoin);
     }
 
     private void OnValidate()
