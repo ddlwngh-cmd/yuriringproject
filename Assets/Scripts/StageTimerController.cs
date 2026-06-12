@@ -190,6 +190,7 @@ public class StageTimerController : MonoBehaviour
 
     private void CompleteStage(bool isSuccess)
     {
+        SaveSessionCoin();
         GamePauseState.SetForcedPause(true);
         Time.timeScale = 0f;
         isResultPauseApplied = true;
@@ -214,6 +215,17 @@ public class StageTimerController : MonoBehaviour
         {
             resultHud.SetActive(true);
         }
+    }
+
+    private void SaveSessionCoin()
+    {
+        if (CoinManager.Instance == null)
+        {
+            Debug.LogWarning("Stage ended without a CoinManager, so session coins could not be saved.", this);
+            return;
+        }
+
+        CoinManager.Instance.SaveSessionCoin();
     }
 
     private void HideResultHud()

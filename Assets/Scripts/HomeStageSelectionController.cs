@@ -18,11 +18,17 @@ public class HomeStageSelectionController : MonoBehaviour
     [SerializeField] private string stageSpriteResourceFolder = "Sprites";
     [SerializeField, Min(0f)] private float stageButtonSpacing = 20f;
 
+    [Header("Coin")]
+    [SerializeField] private TMP_Text coinAmountText;
+
     [Header("Scene")]
     [SerializeField] private string gameSceneName = "GameScene";
 
     private void Awake()
     {
+        ResolveCoinAmountText();
+        RefreshTotalCoin();
+
         if (!ValidateReferences())
         {
             enabled = false;
@@ -56,6 +62,40 @@ public class HomeStageSelectionController : MonoBehaviour
         if (closeButton != null)
         {
             closeButton.onClick.RemoveListener(CloseGameStartPanel);
+        }
+    }
+
+    public void ResetTotalCoin()
+    {
+        CoinStorage.ResetCoin();
+        RefreshTotalCoin();
+    }
+
+    public void AddCheatCoin()
+    {
+        CoinStorage.AddCoin(100);
+        RefreshTotalCoin();
+    }
+
+    public void RefreshTotalCoin()
+    {
+        if (coinAmountText != null)
+        {
+            coinAmountText.SetText("{0}", CoinStorage.LoadTotalCoin());
+        }
+    }
+
+    private void ResolveCoinAmountText()
+    {
+        if (coinAmountText != null)
+        {
+            return;
+        }
+
+        GameObject coinAmountObject = GameObject.Find("CoinAmount");
+        if (coinAmountObject != null)
+        {
+            coinAmountText = coinAmountObject.GetComponent<TMP_Text>();
         }
     }
 
